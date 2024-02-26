@@ -1,18 +1,18 @@
 <template>
   <headerVue />
-  <HelloWorld />
+  <hoofdpageVue />
   <loginvue />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import hoofdpageVue from './components/hoofdpage.vue'
 import headerVue from './components/header.vue';
 import loginvue from './components/login.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    hoofdpageVue,
     headerVue,
     loginvue,
   }
