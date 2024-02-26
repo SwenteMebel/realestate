@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gradient-to-r from-gray-100/50 via-green-300/60 to-black text-gray-100 md:py-3.5  md:px-6 h-14 md:h-20 md:flex justify-between items-center sticky top-0 shadow-xl hover:shadow-gray-700 linear duration-200 z-10">
+    <div class="bg-gradient-to-r from-gray-100/50 via-green-300/60 to-black text-gray-100 md:py-3.5  md:px-6 h-14 md:h-20 md:flex justify-between items-center sticky top-0 shadow-xl hover:shadow-gray-700 linear duration-300 z-10">
    <img alt="Logo" id="logo" src="../assets/RealEstateLogo_met_text.png" class="md:w-[15rem] w-[10.5rem]">
       <div class="flex items-center">
         <h1 class="text-xl font-black self-center">{{ title }}</h1>
