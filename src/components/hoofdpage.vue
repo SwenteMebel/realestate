@@ -13,7 +13,7 @@
 
 
 <section class="grid justify-center mt-20 md:mt-10 font-serif">
-        <div class=" bg-gray-300 w-[30rem] md:w-[50rem] rounded-lg shadow-lg shadow-black">
+        <div class=" w-[30rem] md:w-[50rem] rounded-lg shadow-lg shadow-black">
            <div class="m-5">
             <h1 class="text-center text-2xl font-serif font-semibold">Inspectie formulier</h1>
            </div>
@@ -30,7 +30,7 @@
                       <h1 class="text-center text-lg font-semibold">Schade opnemen</h1>
                     </div>
                   </div>
-                  <div v-if="toggleschade === 'true'" class="mb-3">
+                  <div v-if="toggleschade === 'true'" class="mb-3 mt-4">
                     <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie"><br>
                     <span class="font-semibold">Nieuwe Schade: </span><input class="w-[20px] h-[15px]" type="radio" v-model="selected" value="true" @click="toggle()"><br>
                     <div v-if="selected === 'true'" class="bg-white pl-6 mx-2 border-x-2 border-b-2 rounded-lg mb-5 border-black linear duration-500 shadow-lg shadow-black hover:shadow-xl">                    
@@ -132,6 +132,7 @@
                 </div>
                 <div class="flex justify-center mt-2">
                   <input class="bg-white py-2 rounded-lg px-3 m-2 shadow-black shadow-lg active:shadow-md active:shadow-green-400 duration-100 linear" type="submit" value="Versturen">
+                  
                 </div>
                 
 
@@ -143,10 +144,14 @@
 </template>
 
 <script>
+
 export default {
   name: 'hoofdpageVue',
+
+
   data(){
     return{
+
       selected: 'false', //Als nieuwe schade aangeklikt word.
       toggleschade: 'false', // Formulier schade openen.
       toggleonderhoud: 'false', // Formulier onderhoud openen.

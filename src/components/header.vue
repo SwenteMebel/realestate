@@ -13,7 +13,11 @@
   
 
       <ul class="md:flex md:items-center md:static bg-gradient-to-r from-gray-100 via-green-300/60 to-black text-black md:text-white md:bg-none absolute md:w-auto text-semibold w-full h-auto top-14 duration-300 ease-in" :class="[open ? 'left-0' : 'left-[-100%]']">
-        <li class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/">Voorbeeld Link</router-link></li>
+        <li class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/">Home</router-link></li>
+        <li class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/">Profile</router-link></li>
+        
+
+
         
       </ul>
     </div>

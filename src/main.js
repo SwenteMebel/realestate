@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
 
-createApp(App)
 
+
+createApp(App)
 .mount('#app')
