@@ -1,25 +1,25 @@
-<template>
+<template class="text-text-house">
 <section class="flex justify-center md:h-[20rem] h-[10rem]">
-  <div class=" bg-orange-200 mt-[3rem]">
+  <div class="mt-[3rem]">
     <div class=" ">
       <img src="../assets/RealestateText.png" alt="textimg" class="h-[7rem] md:h-[10rem]">
     </div>
 
     <div class=" flex md:grid justify-center mt-2">
-      <h1 class="md:text-xl text-lg font-serif items-center">Ingelogd als <span>[Gebruikersnaam]</span></h1> 
+      <h1 class="md:text-xl text-lg font-serif items-center font-semibold">Ingelogd als <span>[Gebruikersnaam]</span></h1> 
     </div>
   </div>
 </section>
 
 
-<section class="grid justify-center mt-20 md:mt-10 font-serif">
-        <div class=" w-[30rem] md:w-[50rem] rounded-lg shadow-lg shadow-black">
+<section class="text-text-house grid justify-center mt-20 md:mt-10 font-serif bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
+        <div class="sm:w-[20rem] md:w-[40rem] rounded-lg shadow-lg shadow-black my-20 bg-gray-400/60">
            <div class="m-5">
             <h1 class="text-center text-2xl font-serif font-semibold">Inspectie formulier</h1>
            </div>
             <div class="">
 
-              <form class="mx-2 py-4 px-2 my-3 text-[16px]">
+              <form class=" sm:w-[20rem] md:w-[auto] mx-2 py-4 px-2 my-3 text-[16px]">
 
                 <div class="border-x-2 border-b-2 border-black rounded-lg my-2 mb-8 px-2">
                   <div class="flex">
@@ -131,11 +131,8 @@
                   </div> 
                 </div>
                 <div class="flex justify-center mt-2">
-                  <input class="bg-white py-2 rounded-lg px-3 m-2 shadow-black shadow-lg active:shadow-md active:shadow-green-400 duration-100 linear" type="submit" value="Versturen">
-                  
+                  <input class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear" type="submit" value="Versturen">
                 </div>
-                
-
               </form>
             </div>
         </div>

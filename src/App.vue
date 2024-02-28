@@ -1,7 +1,7 @@
 <template>
   <headerVue />
-  <hoofdpageVue />
   <loginvue />
+  <hoofdpageVue />
 </template>
 
 <script>
