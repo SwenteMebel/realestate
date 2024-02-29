@@ -12,7 +12,7 @@
   </section>
   
   
-  <section class="text-text-house grid justify-center mt-20 md:mt-10 font-serif bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
+  <section class="mb-20 text-text-house grid justify-center mt-20 md:mt-10 font-serif bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
           <div class=" xs:w-[16rem] sm:w-[20rem] md:w-[40rem] rounded-lg shadow-lg shadow-black my-20 bg-gray-400/60">
              <div class="m-5">
               <h1 class="text-center text-2xl font-serif font-semibold">Inspectie formulier</h1>
@@ -43,7 +43,7 @@
                         <input class="w-[20px] h-[15px]" type="checkbox" v-model="normaalGebruik"> <span>Normaal gebruik</span><br>
                         <input class="w-[20px] h-[15px]" type="checkbox" v-model="calamiteit"> <span>Calamiteit</span><br>
                         <input class="w-[20px] h-[15px]" type="checkbox" v-model="anders"> <span>Anders...</span><br>
-                        <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 mb-4 border-black border-2" placeholder="Opmerkingen..."></textarea>
+                        <textarea class=" w-[15rem] md:w-[20rem] h-[10rem] rounded-lg p-2 mb-4 border-black border-2" placeholder="Opmerkingen..."></textarea>
                       </div>
                       <span class="font-semibold">Datum: </span><input class="rounded-lg p-1 text-center border-black border-2" type="date" v-model="datum"><br>
                       <span class="font-semibold">Acute actie vereist: </span> <input class="w-[20px] h-[15px]" type="radio" v-model="actieSchade" value="true" @click="actieToggleSchade()"><br>
