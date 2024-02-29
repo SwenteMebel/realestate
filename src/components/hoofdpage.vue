@@ -13,7 +13,7 @@
   
   
   <section class="mb-20 text-text-house grid justify-center mt-20 md:mt-10 font-serif bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
-          <div class=" xs:w-[16rem] sm:w-[20rem] md:w-[40rem] rounded-lg shadow-lg shadow-black my-20 bg-gray-400/60">
+          <div class=" xs:w-[16rem] sm:w-[20rem] md:w-[40rem] rounded-lg shadow-lg shadow-black my-20 bg-gray-100/60">
              <div class="m-5">
               <h1 class="text-center text-2xl font-serif font-semibold">Inspectie formulier</h1>
              </div>
