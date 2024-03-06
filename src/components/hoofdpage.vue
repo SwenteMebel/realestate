@@ -66,7 +66,7 @@
                       <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie"><br>
                       <span class="font-semibold">Soort Onderhoud:</span><br>
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="schilderwerk"> <span>Schilderwerk</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="houtrot"> <span>Hourot</span><br>
+                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="houtrot"> <span>Houtrot</span><br>
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="elektraOnderhoud"> <span>Elektra</span><br>
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="leidingwerk"> <span>Leidingwerk</span><br>
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="beglazing"> <span>Beglazing</span><br>
@@ -116,7 +116,7 @@
                       </div>
                     </div>
                     <div v-if="togglemodificatie" class="">
-                      <span class="font-semibold">Bestaande Modificaties:</span> <span>[Link bestaande modificaties ]</span><br>
+                      <span class="font-semibold">Bestaande Modificaties:</span> <span>[Link bestaande inventarisatie]</span><br>
                       <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2 w-[16.5rem]" type="text" v-model="locatieAangetroffen" placeholder="Locatie aangetroffen modificaties"><br>
                       <span class="font-semibold">Uitgevoerd door: </span>
                       <select v-model="uitgevoerd" class="border-2 border-black rounded-lg mt-1 ">

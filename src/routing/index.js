@@ -12,16 +12,22 @@ const routes = [
     {
         path: '/profile',
         name: 'profile',
-        component: () => import('@/components/profile.vue')//lazy loading
+        component: () => import('@/components/profile.vue') //lazy loading
 
     },
 
     {
         path: '/login',
         name: 'login',
-        component: () => import('@/components/login.vue')//lazy loading
+        component: () => import('@/components/login.vue') //lazy loading
 
     },
+
+    {
+        path: '/overzicht',
+        name: 'opdrachtenOverzicht',
+        component: () => import('@/components/overzicht.vue') //Lazy Loading  
+    }
 ]
 
 const router = createRouter({
