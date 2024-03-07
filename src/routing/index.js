@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"; 
 
 import homepage from '@/components/hoofdpage.vue';
+//import overZicht from '@/components/overzicht.vue';
 
 const routes = [
     {

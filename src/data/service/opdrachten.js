@@ -1,5 +1,5 @@
-const opdrachten = {
-    opdracht: [
+const opdrachtenData = {
+    opdrachten: [
         {
             id: 1,
             type: 'Schade Opnemen',
@@ -7,12 +7,12 @@ const opdrachten = {
             straat: 'Velperweg',
             huisnr: '39',
             nieuweSchade: {
-                moedwillig: false,
-                slijtage: false,
-                geweld: false,
+                moedwillig: true,
+                slijtage: true,
+                geweld: true,
                 normaalGebruik: false,
                 calamiteit: false,
-                anders: 'Keuken beschadigd, slijtage en oud. Moet vervangen worden.'
+                anders: 'Keuken beschadigd, slijtage en oud. Moet vervangen worden.',
             },
             datum: '13-03-2023',
             actueActie: false,
@@ -27,9 +27,9 @@ const opdrachten = {
             nieuweSchade: {
                 moedwillig: false,
                 slijtage: false,
-                geweld: false,
+                geweld: true,
                 normaalGebruik: false,
-                calamiteit: false,
+                calamiteit: true,
                 anders: ''
             },
             datum: '28-08-2023',
@@ -94,3 +94,5 @@ const opdrachten = {
 
     ]
 }
+
+export default opdrachtenData;
