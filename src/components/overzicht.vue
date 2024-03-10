@@ -28,11 +28,61 @@
                     <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
                     <p>Plaats: <span>{{ opdracht.plaats }}</span></p>
                     <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
-                    <ul v-if="opdracht.soortOnderhoud.schilderwerk == true || opdracht.soortOnderhoud.houtrot == true || opdracht.soortOnderhoud.elektra == true"> 
-
+                    <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2" 
+                    v-if="opdracht.soortOnderhoud.schilderwerk == true || opdracht.soortOnderhoud.houtrot == true || opdracht.soortOnderhoud.elektra == true || opdracht.soortOnderhoud.leidingwerk == true || opdracht.soortOnderhoud.beglazing == true "> 
+                    <h3>Soort Onderhoud</h3>
+                        <li v-if="opdracht.soortOnderhoud.schilderwerk == true">Schilderwerk</li>
+                        <li v-if="opdracht.soortOnderhoud.houtrot == true">Houtrot</li>
+                        <li v-if="opdracht.soortOnderhoud.elektra == true">Elektra</li>
+                        <li v-if="opdracht.soortOnderhoud.leidingwerk == true">Leidingwerk</li>
+                        <li v-if="opdracht.soortOnderhoud.beglazing == true">Beglazing</li>
                     </ul>
-                    
                     <p>Acute actie: <span>{{ opdracht.actueActie ? 'Ja' : 'Nee' }}</span></p>
+               </template>
+
+               <template v-if="opdracht.type === 'Technische installatie'"> 
+                    <p>Soort Opdracht: <span>{{ opdracht.type }}</span></p>
+                    <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
+                    <p>Plaats: <span> {{ opdracht.plaats }}</span></p>
+                    <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
+                    <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2"  
+                    v-if="opdracht.soortInstallatie.koeling == true || opdracht.soortInstallatie.verwarming == true || opdracht.soortInstallatie.luchtverversing == true || opdracht.soortInstallatie.elektra == true || opdracht.soortInstallatie.beveiliging == true">
+                        <li v-if="opdracht.soortInstallatie.koeling">Koeling</li>
+                        <li v-if="opdracht.soortInstallatie.verwarming">Verwarming</li>
+                        <li v-if="opdracht.soortInstallatie.luchtverversing">Luchtverversing</li>
+                        <li v-if="opdracht.soortInstallatie.elektra">Elektra</li>
+                        <li v-if="opdracht.soortInstallatie.beveiliging">Beveiliging</li>
+                    </ul>
+                    <p>Gemelde Storing: <br>
+                    <span>{{ opdracht.gemeldeStoring }}</span></p>
+                    <p>Foto van situatie:</p>
+                    <url src="../assets/{{ opdracht.fotoinstallatie }} alt='{{ opdracht.id }}'"></url>
+                    <p>Goed gekeurd: {{ opdracht.goedGekeurd ? 'Ja' : 'Nee' }}</p>
+                    <p>Opmerking:<br>
+                    <span>{{ opdracht.opmerking }}</span></p>
+               </template>
+
+               <template v-if="opdracht.type === 'Modificaties inverntarisatie'">
+                <p>Soort Opdracht: <span>{{ opdracht.type }}</span></p>
+                    <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
+                    <p>Plaats: <span> {{ opdracht.plaats }}</span></p>
+                    <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
+                    <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2"  
+                    v-if="opdracht.uitgevoerdDoor.huurder == true || opdracht.uitgevoerdDoor.aannemer == true || opdracht.uitgevoerdDoor.onbekend == true">
+                        <h3>Uitgevoerd door</h3>
+                        <li v-if="opdracht.uitgevoerdDoor.huurder">Huurder</li>
+                        <li v-if="opdracht.uitgevoerdDoor.aannemer">Aannemer</li>
+                        <li v-if="opdracht.uitgevoerdDoor.onbekend">Onbekend</li>
+                    
+                    </ul>
+                    <p>Beschrijving: <br>
+                    <span>{{ opdracht.beschrijving }}</span></p>
+                    <ul v-if="opdracht.ondernemenActie.accepteren == true || opdracht.ondernemenActie.accepteren == true|| opdracht.ondernemenActie.accepteren == true ||opdracht.ondernemenActie.accepteren == true">
+                        <li v-if="opdracht.ondernemenActie.accepteren">Accepteren</li>
+                        <li v-if="opdracht.ondernemenActie.latenKeuren">Laten keuren</li>
+                        <li v-if="opdracht.ondernemenActie.verwijderen">Verwijderen</li>
+                        <li v-if="opdracht.ondernemenActie.aanpassenEnKeuren">Laten aanpassen en keuren</li>
+                    </ul>
                </template>
             </div>
         </div>

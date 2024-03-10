@@ -59,7 +59,7 @@ const opdrachtenData = {
             plaats: 'Apeldoorn',
             straat: 'Kervelstraat',
             huisnr: '12',
-            soortOnderhoud: {
+            soortInstallatie: {
                 koeling: false,
                 verwarming: false,
                 luchtverversing: false,
@@ -67,7 +67,7 @@ const opdrachtenData = {
                 beveiliging: true,
             },
             gemeldeStoring: 'Meterkast moet vervangen worden. Ook moet er wat gedaan worden aan de beveiliging van de woning, nieuwe sloten.',
-            testProcedure: 'fotovandemeterkast.jpeg',
+            fotoinstallatie: 'fotovandemeterkast.jpeg',
             goedGekeurd: false,
             opmerking: 'Dit moet gedaan worden voordat er nieuwe bewoners in de woning komen.'
         },
