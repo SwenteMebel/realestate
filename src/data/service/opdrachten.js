@@ -3,9 +3,7 @@ const opdrachtenData = {
         {
             id: 1,
             type: 'Schade Opnemen',
-            plaats: 'Arnhem',
-            straat: 'Velperweg',
-            huisnr: '39',
+            locatie: 'Arnhem',
             nieuweSchade: {
                 moedwillig: true,
                 slijtage: true,
@@ -21,9 +19,7 @@ const opdrachtenData = {
         {
             id: 2,
             type: 'Schade Opnemen',
-            plaats: 'Eindhoven',
-            straat: 'Hoofd straat',
-            huisnr: '192',
+            locatie: 'Eindhoven',
             nieuweSchade: {
                 moedwillig: false,
                 slijtage: false,
@@ -40,9 +36,7 @@ const opdrachtenData = {
         {
             id: 3,
             type: 'Achterstallig onderhoud',
-            plaats: 'Nijmegen',
-            straat: 'Kijzerkarel',
-            huisnr: '201',
+            locatie: 'Nijmegen',
             soortOnderhoud: {
                 schilderwerk: true,
                 houtrot: true,
@@ -56,9 +50,7 @@ const opdrachtenData = {
         {
             id: 4,
             type: 'Technische installatie',
-            plaats: 'Apeldoorn',
-            straat: 'Kervelstraat',
-            huisnr: '12',
+            locatie: 'Apeldoorn',
             soortInstallatie: {
                 koeling: false,
                 verwarming: false,
@@ -75,9 +67,7 @@ const opdrachtenData = {
         {
             id: 5,
             type: 'Modificaties inverntarisatie',
-            plaats: 'Aalten',
-            straat: 'Katoen straat',
-            huisnr: '193',
+            locatie: 'Aalten',
             uitgevoerdDoor: {
                 huurder: false,
                 aannemer: false,

@@ -5,8 +5,7 @@
                <template v-if="opdracht.type === 'Schade Opnemen'">
                     <p>Soort opdracht: <span>{{ opdracht.type }}</span></p>
                     <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
-                    <p>Plaats: <span>{{ opdracht.plaats }}</span></p>
-                    <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
+                    <p>Locatie: <span>{{ opdracht.locatie }}</span></p>
                     <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2"
                     v-if="opdracht.nieuweSchade.moedwillig == true || opdracht.nieuweSchade.slijtage == true || opdracht.nieuweSchade.geweld == true || opdracht.nieuweSchade.normaalGebruik == true || opdracht.nieuweSchade.calamiteit == true">
                         <h3>Nieuwe Schade</h3>
@@ -26,8 +25,7 @@
                <template v-if="opdracht.type === 'Achterstallig onderhoud'">
                 <p>Soort opdracht: <span>{{ opdracht.type }}</span></p>
                     <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
-                    <p>Plaats: <span>{{ opdracht.plaats }}</span></p>
-                    <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
+                    <p>Locatie: <span>{{ opdracht.locatie }}</span></p>
                     <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2" 
                     v-if="opdracht.soortOnderhoud.schilderwerk == true || opdracht.soortOnderhoud.houtrot == true || opdracht.soortOnderhoud.elektra == true || opdracht.soortOnderhoud.leidingwerk == true || opdracht.soortOnderhoud.beglazing == true "> 
                     <h3>Soort Onderhoud</h3>
@@ -43,8 +41,7 @@
                <template v-if="opdracht.type === 'Technische installatie'"> 
                     <p>Soort Opdracht: <span>{{ opdracht.type }}</span></p>
                     <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
-                    <p>Plaats: <span> {{ opdracht.plaats }}</span></p>
-                    <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
+                    <p>Locatie: <span> {{ opdracht.locatie }}</span></p>
                     <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2"  
                     v-if="opdracht.soortInstallatie.koeling == true || opdracht.soortInstallatie.verwarming == true || opdracht.soortInstallatie.luchtverversing == true || opdracht.soortInstallatie.elektra == true || opdracht.soortInstallatie.beveiliging == true">
                         <li v-if="opdracht.soortInstallatie.koeling">Koeling</li>
@@ -65,8 +62,7 @@
                <template v-if="opdracht.type === 'Modificaties inverntarisatie'">
                 <p>Soort Opdracht: <span>{{ opdracht.type }}</span></p>
                     <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
-                    <p>Plaats: <span> {{ opdracht.plaats }}</span></p>
-                    <p>Adres: <span>{{ opdracht.straat }} {{ opdracht.huisnr }}</span></p>
+                    <p>Locatie: <span> {{ opdracht.locatie }}</span></p>
                     <ul class="bg-gray-500 md:pl-2 list-disc md:ml-3 md:py-2"  
                     v-if="opdracht.uitgevoerdDoor.huurder == true || opdracht.uitgevoerdDoor.aannemer == true || opdracht.uitgevoerdDoor.onbekend == true">
                         <h3>Uitgevoerd door</h3>
