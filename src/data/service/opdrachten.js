@@ -69,14 +69,14 @@ const opdrachtenData = {
             type: 'Modificaties inverntarisatie',
             locatie: 'Aalten',
             uitgevoerdDoor: {
-                huurder: false,
+                huurder: true,
                 aannemer: false,
-                onbekend: true
+                onbekend: false
             },
             beschrijving: 'onbekende persoon heeft radiatoren verwijderd, dit moet weer terug geplaatst worden en gekeurd worden.',
             ondernemenActie: {
                 accepteren: false,
-                latenKeuren: false,
+                latenKeuren: true,
                 verwijderen: false,
                 aanpassenEnKeuren: true
             }

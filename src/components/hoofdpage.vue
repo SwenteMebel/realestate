@@ -72,7 +72,7 @@
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="beglazing"> <span>Beglazing</span><br>
                       <span class="font-semibold">Acute actie vereist: </span> <input class="w-[20px] h-[15px]" type="radio" v-model="actieonderhoud" value="true" @click="actieOnderhoud()" ><br>
                       <span class="font-semibold">Kostenindicatie </span>
-                      <select class="border-2 border-black rounded-lg mb-3 text-center" v-model="kostenindicatie" placeholder="Kosten">
+                      <select class="border-2 border-black rounded-lg mb-3 " v-model="kostenindicatie" placeholder="Kosten">
                         <option class="" value="0_500">€0-500</option>
                         <option class="" value="500_1500">€500-1.500</option>
                         <option class="" value="1500">€1.500+</option>
