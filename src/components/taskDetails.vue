@@ -81,16 +81,17 @@
 
 
 <script>
-import opdrachtenData from '../data/service/opdrachten.js'
+import opdrachtenData from '@/data/service/opdrachten';
 
 export default {
   name: 'TaksDetails',
-    
+
   data(){
     return{
         opdrachtenData,
     }
-  }
+  },
+
 
 }
 </script>

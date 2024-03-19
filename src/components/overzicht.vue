@@ -12,8 +12,8 @@
                 <template v-if="opdracht.type === 'Achterstallig onderhoud'">
                     <p>Soort opdracht: <span>{{ opdracht.type }}</span></p>
                     <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
-                    <p>Locatie: <span>{{ opdracht.locatie }}</span></p>   
-               </template>
+                    <p>Locatie: <span>{{ opdracht.locatie }}</span></p>  
+                </template>
 
                <template v-if="opdracht.type === 'Technische installatie'"> 
                     <p>Soort Opdracht: <span>{{ opdracht.type }}</span></p>
@@ -36,13 +36,13 @@
 import opdrachtenData from '../data/service/opdrachten.js' // import alle opdrachtenData uit de data map
 import taskDetails from '../components/taskDetails.vue'
 
-export default {
-  components: { // Hier laad je alle componenten in die je importeert 
-    taskDetails 
-    },
-    
+export default {  
     name: 'overzichtVue',
    
+    // Hier laad je alle componenten in die je importeert 
+    components: { 
+    taskDetails,
+    },
 
     data(){
         return{
