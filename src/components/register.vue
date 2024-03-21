@@ -6,68 +6,49 @@
                     <img src="../assets//RealestateText.png" alt="logo" class="w-30 rounded-lg">
                 </div>
                 <div class="text-center">
-                    <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Login</h1> 
+                    <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Register</h1> 
                 </div>
             </div>
             <form class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
-                <p v-if="errorMsg">{{ errorMsg }}</p>
                 <label class=" items-end grid pl-1 font-serif font-semibold">Email:</label>
                 <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" required>
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
                 <input class="border-2 rounded-xl pl-2" type="password" v-model="password" placeholder="Wachtwoord" required>
-                <input class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem]" type="submit"  @click='login()' value="Login">
+                <input class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white" type="submit" @click="register" value="Registreer">
             </form>
         </div>  
     </section>
     
 </template>
 
-<script>
+<script >
 
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // firebase user registratie api 
+import { ref } from "vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // firebase user registratie api 
 import { useRouter } from "vue-router"; // import router zodat deze hier ook gebruikt kunnen worden. 
 
+
+const email = ref("");
+const password = ref("");
 const router = useRouter() // word gebruikt als een soort redirect. 
 
 
 export default {
-    name: 'loginVue',
+    name: 'registerVue',
 
-    data(){
-        return {
-            email: '',
-            password: '',
-            errorMsg: '',
-
-        }
-    },
     methods:{
-        login() {
+        register() {
             const auth = getAuth();
-            signInWithEmailAndPassword(auth, this.email, this.password)
+            createUserWithEmailAndPassword(auth, email.value, password.value)
             
             .then(() => {
-                console.log("Ingelogd.");
-                console.log(auth.currentUser); // de user die is ingelogd
+                console.log("Registratie gelukt.");
+                
                 router.push('/overzicht') // na registratie word je naar de login pagina verwezen 
             })
             .catch( (error) => {
                 console.log(error.code);
-                switch(error.code){
-                    case "auth/invalid-email":
-                        this.errorMsg = "Ongeldig email.";
-                        break;
-                    case "auth/user-not-found":
-                        this.errorMsg = "Geen account gevonden.";
-                        break;
-                    case "auth/wrong-password":
-                        this.errorMsg = "Ongeldig wachtwoord";
-                        break;
-                    default:
-                        this.errorMsg = "Email of Wachtwoord onjuist."
-                        break;
-                }
+                alert('Registratie is niet gelukt, probeer het opnieuw ' +   error.code);
             })
         }
     }

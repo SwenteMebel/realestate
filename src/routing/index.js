@@ -28,7 +28,13 @@ const routes = [
         path: '/overzicht',
         name: 'opdrachtenOverzicht',
         component: () => import('@/components/overzicht.vue') //Lazy Loading  
-    }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import('@/components/register.vue') //Lazy Loading  
+    },
+    
 ]
 
 const router = createRouter({

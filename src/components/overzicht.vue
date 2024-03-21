@@ -87,4 +87,4 @@ export default {
     }
 }
 
-</script>
+</script>../data/DB/opdrachten.js
