@@ -16,8 +16,9 @@
       <li @click="openMenu()" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/"><i class="fa-solid fa-house fa-sm" style="color: #27ce78;"></i> Home</router-link></li>
       <li @click="openMenu()" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/profile"><i class="fa-solid fa-user fa-sm" style="color: #27ce78;"></i> Profile</router-link></li>
       <li @click="openMenu()" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/overzicht"><i class="fa-solid fa-clipboard-list fa-sm" style="color: #27ce78;"></i> Overzicht</router-link></li>
-      <li @click="openMenu()" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/login"><i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-sm" style="color: #27ce78;"></i> Log uit</router-link></li>
-    
+      <li  @click="openMenu()" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/login"><i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-sm" style="color: #27ce78;"></i> Log uit</router-link></li>
+      <li  @click="openMenu()" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/register"><i class="fa-regular fa-address-card fa-sm" style="color: #27ce78;"></i> Registeer</router-link></li>
+      
     </ul>
   </div>
 
@@ -40,8 +41,11 @@
       methods:{
           openMenu(){
               this.open = !this.open;
-          }
+          },
+
+       
       },      
+
   }
 </script>
 
