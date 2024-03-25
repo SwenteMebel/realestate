@@ -22,8 +22,35 @@
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import router from "@/routing";
+import { ref } from 'vue';
+
 export default {
     name: 'registerVue',
+
+    
+methods: {
+    register() {
+        const email = ref('');
+        const password = ref('');
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        alert(user + ' is gemaakt')
+        router.push('/login')
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert('Oeps er ging iets fout, probeer het opnieuw!' + errorCode  + ' Fout melding is: ' + errorMessage)
+        // ..
+        });  
+    }
+  
+},
 
 
 }
