@@ -1,5 +1,5 @@
 <template >
-    
+       
         <div v-if="opdracht.type === 'Schade Opnemen'" class="font-serif">
             <hr class="m-2 p-[0.2rem]  bg-gradient-to-r from-green-lime via-light-dark to-dark-house rounded-2xl">
             <ul class="bg-gray-300 md:pl-2 list-disc md:mx-3 md:py-2 md:px-8 px-7 py-2 rounded-xl my-3 shadow-md shadow-black"
@@ -16,7 +16,7 @@
             <p class="font-semibold">Acute Actie: <span class="font-normal">{{ opdracht.actueActie ? 'Ja' : 'Nee' }}</span></p>
             <p class="font-semibold">Omschrijving: <br><span class="font-normal">{{ opdracht.omschrijving }}</span></p>
         </div>
-
+        
         <template v-if="opdracht.type === 'Achterstallig onderhoud'">
             <hr class="m-2 p-[0.2rem]  bg-gradient-to-r from-green-lime via-light-dark to-dark-house rounded-2xl">
             <ul class="bg-gray-300 md:pl-2 list-disc md:mx-3 md:py-2 md:px-8 px-7 py-2 rounded-xl my-3 shadow-md shadow-black" 
@@ -91,3 +91,4 @@ export default {
 
 }
 </script>
+
