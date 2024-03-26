@@ -1,8 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged} from "firebase/auth";
-import { getFirestore } from 'firebase/firestore/lite';
-import router from "./routing";
+
+import { 
+    getFirestore, 
+    collection,
+    getDocs,
+} from 'firebase/firestore';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,25 +19,18 @@ const firebaseConfig = {
   messagingSenderId: "327419885461",
   appId: "1:327419885461:web:f920d102ebdbe9a755a89c"
 };
-
+// init firebase app
 initializeApp(firebaseConfig)
 
 
-const auth = getAuth(firebaseConfig);
-const db  = getFirestore(firebaseConfig);
-const user = ''; 
+// init service
+const db  = getFirestore();
 
-// kijkt na of er een user is ingelogd.
-onAuthStateChanged(auth, user => {
-  if(!user == null ) {
-    console.log('logged in!' )
-    router.push('/') // gaat naar de overzicht pagina 
-  } else {
-    console.log('no user.');
-    router.push('/login');
-  }
-})
+// collection ref
+const SchadeOpnemen = collection(db, 'SchadeOpnemen')
 
-
-
-export {auth, db, user}
+// get collection data
+getDocs(SchadeOpnemen)
+    .then((snapshot) => {
+        console.log(snapshot.docs)
+    })
