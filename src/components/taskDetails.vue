@@ -73,21 +73,26 @@
                 <li class="ml-5" v-if="opdracht.ondernemenActie.aanpassenEnKeuren">Laten aanpassen en keuren</li>
             </ul>
         </template>
-    
+    <!-- props: ['opdracht'] te gebruiken ontvang je de Data die is mee gegeven met de :opdracht="selectedTaskData"
+de benaming 'opdracht' word hier gebruikt als key value omdat die ook met ':opdracht' word verstuurd. -->
 </template>
 
 
-<!-- props: ['opdracht'] te gebruiken ontvang je de Data die is mee gegeven met de :opdracht="selectedTaskData"
-de benaming 'opdracht' word hier gebruikt als key value omdat die ook met ':opdracht' word verstuurd. -->
+
 
 <script>
 
+import opdrachtenData from '@/data/service/opdrachten';
 
 export default {
-    name: 'TaksDetails',
-    props: ['opdracht'], //Deze component krijgt de DATA opdracht mee uit de parent file (overzicht.vue)
+  name: 'TaksDetails',
 
-   
+  data(){
+    return{
+        opdrachtenData,
+    }
+  },
+
 
 }
 </script>

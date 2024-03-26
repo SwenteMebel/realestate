@@ -1,5 +1,5 @@
 <template>
-  <div class="text-text-house  md:hidden bg-gradient-to-r from-green-lime via-light-dark to-dark-house justify-between items-center sticky bottom-0 shadow-xl hover:shadow-gray-700 linear duration-300 z-10">
+  <div v-if="!user == null" class="text-text-house  md:hidden bg-gradient-to-r from-green-lime via-light-dark to-dark-house justify-between items-center sticky bottom-0 shadow-xl hover:shadow-gray-700 linear duration-300 z-10">
     <div class="grid grid-cols-3">
         <div class="flex justify-start">
             <img alt="Logo" id="logo" src="../assets/RealEstateLogo.png" class="w-[3rem] h-[3rem]">

@@ -125,7 +125,7 @@
                         <option value="onbekend">Onbekend</option>
                       </select><br>
                       <span class="font-semibold">Beschrijving Modificatie</span><br>
-                      <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" placeholder="Beschrijving"></textarea><br>
+                      <textarea v-model="beschrModi" class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" placeholder="Beschrijving"></textarea><br>
                       <span class="font-semibold">Te ondernemen actie</span><br>
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="accepteren"> <span>Accepteren</span><br>
                       <input class="w-[20px] h-[15px]" type="checkbox" v-model="keuren"> <span>Laten keuren</span><br>

@@ -9,13 +9,13 @@
                     <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Login</h1> 
                 </div>
             </div>
-            <form class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
+            <form @submit.prevent="login" class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
                 <p v-if="errorMsg">{{ errorMsg }}</p>
                 <label class=" items-end grid pl-1 font-serif font-semibold">Email:</label>
                 <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" required>
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
                 <input class="border-2 rounded-xl pl-2" type="password" v-model="password" placeholder="Wachtwoord" required>
-                <input class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem]" type="submit"  @click='login()' value="Login">
+                <button class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white">Login</button>
             </form>
         </div>  
     </section>
@@ -23,54 +23,9 @@
 </template>
 
 <script>
-
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // firebase user registratie api 
-import { useRouter } from "vue-router"; // import router zodat deze hier ook gebruikt kunnen worden. 
-
-const router = useRouter() // word gebruikt als een soort redirect. 
-
-
 export default {
     name: 'loginVue',
 
-    data(){
-        return {
-            email: '',
-            password: '',
-            errorMsg: '',
-
-        }
-    },
-    methods:{
-        login() {
-            const auth = getAuth();
-            signInWithEmailAndPassword(auth, this.email, this.password)
-            
-            .then(() => {
-                console.log("Ingelogd.");
-                console.log(auth.currentUser); // de user die is ingelogd
-                router.push('/overzicht') // na registratie word je naar de login pagina verwezen 
-            })
-            .catch( (error) => {
-                console.log(error.code);
-                switch(error.code){
-                    case "auth/invalid-email":
-                        this.errorMsg = "Ongeldig email.";
-                        break;
-                    case "auth/user-not-found":
-                        this.errorMsg = "Geen account gevonden.";
-                        break;
-                    case "auth/wrong-password":
-                        this.errorMsg = "Ongeldig wachtwoord";
-                        break;
-                    default:
-                        this.errorMsg = "Email of Wachtwoord onjuist."
-                        break;
-                }
-            })
-        }
-    }
     
 }
 </script>

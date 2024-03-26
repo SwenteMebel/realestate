@@ -4,12 +4,11 @@
             <div class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime" 
                 v-for="opdracht, index in opdrachtenData.opdrachten" :key="opdracht.id">
 
-               <div v-if="opdracht.type === 'Schade Opnemen'" @click="selectTask(index)" >
-                    <p class="font-semibold">Soort opdracht: <span class="font-normal">{{ opdracht.type }}</span></p>
-                    <p class="font-semibold">Ordernummer: <span class="font-normal">{{ opdracht.id }}</span></p>
-                    <p class="font-semibold">Locatie: <span class="font-normal">{{ opdracht.locatie }}</span></p>
-                    <taskDetails v-if="toggle && selectedTaskIndex === index" :opdracht="selectedTaskData" />
-               </div>
+                <template v-if="opdracht.type === 'Achterstallig onderhoud'">
+                    <p>Soort opdracht: <span>{{ opdracht.type }}</span></p>
+                    <p>Ordernummer: <span>{{ opdracht.id }}</span></p>
+                    <p>Locatie: <span>{{ opdracht.locatie }}</span></p>  
+                </template>
 
                 <div v-if="opdracht.type === 'Achterstallig onderhoud'" @click="selectTask(index)">
                     <p class="font-semibold">Soort opdracht: <span class="font-normal">{{ opdracht.type }}</span></p>
@@ -42,13 +41,13 @@
 import opdrachtenData from '../data/service/opdrachten.js' // import alle opdrachtenData uit de data map
 import taskDetails from '../components/taskDetails.vue'
 
-export default {
-  components: { // Hier laad je alle componenten in die je importeert 
-    taskDetails 
-    },
-    
+export default {  
     name: 'overzichtVue',
    
+    // Hier laad je alle componenten in die je importeert 
+    components: { 
+    taskDetails,
+    },
 
     data(){
         return{
@@ -79,4 +78,4 @@ export default {
     }
 }
 
-</script>../data/DB/opdrachten.js
+</script>
