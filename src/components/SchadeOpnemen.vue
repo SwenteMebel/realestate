@@ -93,12 +93,13 @@ export default {
           acuteActie: this.schadeActie,
           Omschrijving: this.schadeOmschrijving,
         })
-        alert('Nieuwe schade is toegevoegd.')
-        .then((e) => {
-          e.preventDefault();
+        
+        .then(() => {
+          alert('Nieuwe schade is toegevoegd.')
+      
         })
         .catch(error => {
-          console.log(error.message)
+          alert(error.message)
         })
        
       },
