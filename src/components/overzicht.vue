@@ -31,7 +31,7 @@
                     <p class="font-semibold">Locatie: <span class="font-normal"> {{ opdracht.locatie }}</span></p>
                     <taskDetails  v-if="toggle && selectedTaskIndex === index" :opdracht="selectedTaskData" />
                </div>
-            </div>
+            </div>           
         </div>
     </section>
 </template>
@@ -41,7 +41,7 @@
 <script>
 import opdrachtenData from '../data/service/opdrachten.js' // import alle opdrachtenData uit de data map
 import taskDetails from '../components/taskDetails.vue'
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, getDocs } from 'firebase/firestore';
 
 const db = getFirestore(); // connectie met de database firestore
 
@@ -51,17 +51,25 @@ const technischeInstallatie = collection(db, 'TechnischeInstallatie') // de data
 const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data ModificatieInverntaris ophalen en variable geven
 
 // De variable verwerken in een array dmv een foreach loop
-getDocs(schadeOpnemen)
-    .then((snapshot) => {
-       let schade = []
+onSnapshot(schadeOpnemen, (snapshot) => {
+    let schade = []
        snapshot.docs.forEach((doc) => {
             schade.push({...doc.data(), id: doc.id})
        })
        console.log(schade)
-    })
-    .catch(error => {
-        console.log(error.message)
-    })
+}),
+
+//getDocs(schadeOpnemen)
+  //  .then((snapshot) => {
+    //   let schade = []
+      // snapshot.docs.forEach((doc) => {
+        //    schade.push({...doc.data(), id: doc.id})
+       //})
+       //console.log(schade)
+    //})
+    //.catch(error => {
+      //  console.log(error.message)
+    //})
 // De variable verwerken in een array dmv een foreach loop
 getDocs(achterStallig)
     .then((snapshot) => {

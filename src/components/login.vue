@@ -9,8 +9,8 @@
                     <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Login</h1> 
                 </div>
             </div>
-            <form @submit.prevent="login" class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
-                <p v-if="errorMsg">{{ errorMsg }}</p>
+            <form v-on:submit="login" class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
+               
                 <label class=" items-end grid pl-1 font-serif font-semibold">Email:</label>
                 <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" required>
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
@@ -23,9 +23,53 @@
 </template>
 
 <script>
+import { firebaseConfig } from '@/FirebaseConfig';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { ref } from 'vue';
+
+
+
+initializeApp(firebaseConfig)
+
+const auth = getAuth();
+
 export default {
     name: 'loginVue',
 
-    
+    data(){
+        return{
+            email: ref(''),
+            password: ref(''),
+            user: ''
+        }
+    },
+
+    watch: {
+
+    },
+
+    methods:{
+
+        login(e){
+            e.preventDefault();
+            
+            
+            signInWithEmailAndPassword(auth, this.email, this.password)
+                .then((User) => {
+                    
+                    alert('logged in as ' + User)
+                }) 
+                .catch((err) => {
+                    alert(err.message)
+                })
+            
+                
+            
+      
+        }
+
+    }
+
 }
 </script>

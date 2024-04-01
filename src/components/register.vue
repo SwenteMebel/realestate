@@ -9,7 +9,7 @@
                     <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Register</h1> 
                 </div>
             </div>
-            <form  @submit.prevent="register" class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
+            <form v-on:submit="register" class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
                 <label class=" items-end grid pl-1 font-serif font-semibold">Email:</label>
                 <input class="border-2 rounded-xl pl-2" type="email" v-model="email" placeholder="E-mail" required>
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
@@ -22,37 +22,44 @@
 </template>
 
 <script>
-
+import { firebaseConfig } from '@/FirebaseConfig.js'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import router from "@/routing";
+
 import { ref } from 'vue';
+import { initializeApp } from 'firebase/app';
+
+initializeApp(firebaseConfig)
+
+const auth = getAuth();
 
 export default {
-name : 'registerVue',
+    name: 'registerVue',
 
-    methods:{
-        register(){
-        // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
+    data(){
+        return{
+            email: ref(''),
+            password: ref(''),
+        }
+    },  
 
-            // Your web app's Firebase configuration
+
+methods: {
+    register(e) {
+        e.preventDefault();
+    
+        createUserWithEmailAndPassword(auth, this.email, this.password)
+        .then((auth) => {
+            alert('user aangemaakt' + auth.user)
+        }) 
+        .catch((err) => {
+            alert(err.message)
+        })
+         
             
-                const auth = getAuth();
-                const email = ref('');
-                const password = ref('');
-                    createUserWithEmailAndPassword(auth, email.value, password.value)
-                .then((email, password) => {
-                    const user = email.value + password.value;
-                    alert( user + 'gebruiker aangemaakt');
-                    router.push('/login');
-                }).catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    alert('oeps er ging iets fout. De fout code is: ' + errorCode  + '. De fout melding is: ' + errorMessage)
-            }) 
-        },
-    },
+    }
+  
+},
+
+
 }
-
-
 </script>
