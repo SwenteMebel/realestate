@@ -27,6 +27,7 @@ import { firebaseConfig } from '@/FirebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { ref } from 'vue';
+import router from '@/routing';
 
 
 
@@ -41,12 +42,8 @@ export default {
         return{
             email: ref(''),
             password: ref(''),
-            user: ''
+            
         }
-    },
-
-    watch: {
-
     },
 
     methods:{
@@ -57,8 +54,8 @@ export default {
             
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then((User) => {
-                    
                     alert('logged in as ' + User)
+                    router.push('/home')
                 }) 
                 .catch((err) => {
                     alert(err.message)

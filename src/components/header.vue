@@ -32,6 +32,9 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/FirebaseConfig';
 import { getAuth, signOut } from 'firebase/auth'
+import router from '@/routing';
+
+
 
 initializeApp(firebaseConfig)
 
@@ -63,6 +66,7 @@ const auth = getAuth();
             .then(() => {
               alert('User has signed out.')
               console.log('User has signed out.')
+              router.push('/login')
             })
             .catch((err) => {
               console.log(err.message)
