@@ -27,10 +27,18 @@ initializeApp(firebaseConfig)
 const db  = getFirestore();
 
 // collection ref
-const SchadeOpnemen = collection(db, 'SchadeOpnemen')
+const SchadeOpnemen = collection(db, 'SchadeOpnemen');
+
 
 // get collection data
 getDocs(SchadeOpnemen)
     .then((snapshot) => {
-        console.log(snapshot.docs)
+        let schade = [];
+        snapshot.docs.forEach((doc) => {
+            schade.push({ ...doc.data(), id: doc.id})
+        })
+        console.log(schade)
+    })
+    .catch(error => {
+        console.log(error.message)
     })
