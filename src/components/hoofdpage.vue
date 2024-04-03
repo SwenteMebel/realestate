@@ -6,7 +6,7 @@
       </div>
   
       <div class=" flex md:grid justify-center mt-2">
-        <h1 class="md:text-xl text-lg font-serif items-center font-semibold">Ingelogd als <span>[Gebruikersnaam]</span></h1> 
+        <h1 class="md:text-xl text-lg font-serif items-center font-semibold">Ingelogd als <span>{{ user.email }}</span></h1> 
       </div>
     </div>
   </section>
@@ -49,6 +49,21 @@
       TechnischeVue,
       ModificatieInventVue,
     },
+
+    data(){
+      return{
+        user: '',
+      }
+    },
+
+
+    created(){
+      const user = localStorage.getItem('user')
+      if(user){
+        this.user = JSON.parse(user);
+      }
+
+    }
   
   }
   </script>

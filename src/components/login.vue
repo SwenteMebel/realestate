@@ -9,13 +9,13 @@
                     <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Login</h1> 
                 </div>
             </div>
-            <form v-on:submit="login" class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
-               
+
+            <form  class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
                 <label class=" items-end grid pl-1 font-serif font-semibold">Email:</label>
-                <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" required>
+                <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" autocomplete="username" required >
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
-                <input class="border-2 rounded-xl pl-2" type="password" v-model="password" placeholder="Wachtwoord" required>
-                <button class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white">Login</button>
+                <input class="border-2 rounded-xl pl-2" type="password" v-model="password" placeholder="Wachtwoord" autocomplete="current-password" required>
+                <button  @click="login()" type="button" class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white">Login</button>
             </form>
         </div>  
     </section>
@@ -23,10 +23,9 @@
 </template>
 
 <script>
-import { firebaseConfig } from '@/FirebaseConfig';
+import { firebaseConfig } from '@/store/FirebaseConfig';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { ref } from 'vue';
 import router from '@/routing';
 
 
@@ -40,30 +39,31 @@ export default {
 
     data(){
         return{
-            email: ref(''),
-            password: ref(''),
-            
+            email: '',
+            password: '',
+            user: '',
         }
     },
 
     methods:{
 
-        login(e){
-            e.preventDefault();
-            
-            
+        login(){
             signInWithEmailAndPassword(auth, this.email, this.password)
-                .then((User) => {
-                    alert('logged in as ' + User)
-                    router.push('/home')
+                .then(() => {
+                    alert('logged in.')
+                    console.log('logged in as ' , auth.currentUser)
+                    this.user = auth.currentUser;
+                    const user = this.user 
+                    localStorage.setItem('user', JSON.stringify(user));
+                    router.push('/')
+
                 }) 
                 .catch((err) => {
                     alert(err.message)
                 })
+             
             
-                
             
-      
         }
 
     }

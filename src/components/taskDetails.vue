@@ -83,21 +83,15 @@ de benaming 'opdracht' word hier gebruikt als key value omdat die ook met ':opdr
 
 <script>
 
-import opdrachtenData from '@/data/service/opdrachten';
-
-
 export default {
     name: 'TaksDetails',
     props: [
         'opdracht',
+        
     ],
 
 
-    data(){
-        return{
-            opdrachtenData,
-        }
-    },
+    
 
 
 }

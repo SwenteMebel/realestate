@@ -32,7 +32,7 @@
    
    import { ref } from 'vue'
    import { initializeApp } from 'firebase/app'; 
-   import { firebaseConfig } from '@/FirebaseConfig' 
+   import { firebaseConfig } from '@/store/FirebaseConfig' 
    import { getFirestore, collection, addDoc} from 'firebase/firestore';
 
    initializeApp(firebaseConfig) //defineert de db in de app.

@@ -33,7 +33,7 @@
    
 
   import { initializeApp } from 'firebase/app'; 
-  import { firebaseConfig } from '@/FirebaseConfig' 
+  import { firebaseConfig } from '@/store/FirebaseConfig' 
   import { getFirestore, collection, addDoc} from 'firebase/firestore';
   import { ref } from 'vue';
 
