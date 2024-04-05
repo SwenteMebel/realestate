@@ -41,7 +41,6 @@
                 <p class="font-semibold">Soort opdracht: <span class="font-normal">Schade Opnemen</span></p>
                 <p class="font-semibold">Schade Nummer: <span class="font-normal">{{ schadedata.id }}</span></p>
                 <p class="font-semibold">Locatie: <span class="font-normal">{{ schadedata.locatie }}</span></p>
-                <p class="font-semibold" v-if="schadedata.Calamiteit">Calamiteit: <span class="font-normal">{{ schadedata.Calamiteit }}</span></p>
                 <p class="font-semibold" >Datum: <span class="font-normal">{{ schadedata.Datum }}</span></p>
                 
                 <taskData  v-if="toggle && selectedTaskIndex === index" :schadedata="schadedata" />
