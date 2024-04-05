@@ -1,11 +1,7 @@
-import axios from 'axios'; 
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
-import { getFirestore, collection } from 'firebase/firestore';
-
-    
-const db = getFirestore(); // connectie met de database firestore
-
-const schadeOpnemen = collection(db, 'SchadeOpnemen'); // de data SchadeOpnemen ophalen en een variable geven.
+const db = getFirestore();
+const schadeOpnemen = collection(db, 'SchadeOpnemen');
 
 export default({
     namespaced: true,
@@ -13,9 +9,7 @@ export default({
     state: {
        schade: [],
        loadingStatus: 'notloading',
-       error: [],
-
-       
+       error: [],   
     },
 
     mutations: {
@@ -34,26 +28,26 @@ export default({
         SET_ERROR(state, payload){
             state.error.push(payload);
         }
-
-
     },
 
     actions:{
-        async ophalenSchade(context){
+        ophalenSchade(context){
             console.log('ophalenSchade API is aan het laden.')
             context.commit('LOADING_STATUS', 'loading');
             
-            
-            try {
-                const result = await axios.get(schadeOpnemen);
+            const data = onSnapshot(schadeOpnemen, (snapshot) => {
+                let schade = [];
+                snapshot.docs.forEach((doc) => {
+                    schade.push({...doc.data(), id: doc.id})
+                });
                 context.commit('LOADING_STATUS', 'notloading');
-                context.commit('SET_DATA', result.data);
-            } catch (err) {
+                context.commit('SET_DATA', schade);
+            }, error => {
                 context.commit('LOADING_STATUS', 'notloading');
                 context.commit('SET_DATA', [] );
-                context.commit('SET_ERROR', err)
-            }
-            
+                context.commit('SET_ERROR', error);
+            });
+            return data;
         },
     },
 
@@ -64,5 +58,4 @@ export default({
     getters: {
     
     }
-
 })

@@ -26,7 +26,7 @@
  
 
 </template>
-  n
+  
 <script>
 
 import { initializeApp } from 'firebase/app';
@@ -58,27 +58,24 @@ const auth = getAuth();
       
     created(){
         const user = localStorage.getItem('user')
-        
         if(user){
           this.user = JSON.parse(user)
         }  watch(this.user)
     },
 
-      methods:{
-          openMenu(){
-              this.open = !this.open;
-          },
+    methods:{
+      openMenu(){
+          this.open = !this.open;
+      },
 
-          logout(){
-            
-            signOut(auth)
-            localStorage.removeItem('user')
-            this.user = null
-            router.push('/login')
-          },
-
-       
-      },      
+      logout(){
+        
+        signOut(auth)
+        localStorage.removeItem('user')
+        this.user = null
+        router.push('/login')
+      },
+    },      
 
   }
 </script>

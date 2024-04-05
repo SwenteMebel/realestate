@@ -1,4 +1,5 @@
 <template>
+
     <section class="flex justify-center w-screen mb-20">
         <div class="w-[22rem] md:w-[30rem] md:h-[35rem] h-[30rem] mt-[5rem] md:mt-[10rem] grid justify-center rounded-xl shadow-lg shadow-black mb-5 bg-gradient-to-r from-green-lime via-light-dark to-dark-house focus:shadow-gray-700 linear duration-200">
             <div class=" grid justify-center items-center">
@@ -11,6 +12,7 @@
             </div>
 
             <form  class="p-2 md:w-[25rem] s:w-[18rem] grid mb-6">
+                <span>{{ err }}</span> 
                 <label class=" items-end grid pl-1 font-serif font-semibold">Email:</label>
                 <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" autocomplete="username" required >
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
@@ -29,10 +31,11 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import router from '@/routing';
 
 
-
 initializeApp(firebaseConfig)
 
 const auth = getAuth();
+
+
 
 export default {
     name: 'loginVue',
@@ -55,16 +58,14 @@ export default {
                     this.user = auth.currentUser;
                     const user = this.user 
                     localStorage.setItem('user', JSON.stringify(user));
-                    router.push('/')
 
+                    router.push('/')
+                    
                 }) 
                 .catch((err) => {
                     alert(err.message)
                 })
-             
-            
-            
-        }
+        },
 
     }
 

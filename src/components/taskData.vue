@@ -9,7 +9,7 @@
             <li class="ml-5" v-if="schadedata.Geweld">Geweld</li>
             <li class="ml-5" v-if="schadedata.NormaalGebruik">Normaal gebruik</li>
             <li class="ml-5" v-if="schadedata.Calamiteit">Calamiteit</li>
-            <p class="font-semibold" v-if="schadedata.Anders != '' ">Opmerking:<br> <span class="font-normal">{{ schadedatadata.Anders }}</span></p>
+            <p class="font-semibold" v-if="schadedata.Anders != '' ">Opmerking:<br> <span class="font-normal">{{ schadedata.AndersOschrijving }}</span></p>
         </ul>
         
         <p class="font-semibold">Acute Actie: <span class="font-normal">{{ schadedata.acuteActie  ? 'Ja' : 'Nee' }}</span></p>
