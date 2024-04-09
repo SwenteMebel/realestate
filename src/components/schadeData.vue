@@ -55,7 +55,7 @@ export default {
     },
 
     beforeCreate() {
-        console.log('beforecreate word geladen')
+     
         this.$store.dispatch('schadeAPI/ophalenSchade') // roept naar de functie ophalenSchade in de Axios API 
     },
 
@@ -68,7 +68,6 @@ export default {
         },
 
         schades() {
-            console.log('dit is data van schades functie ' , this.$store.state.schadeAPI.schade)
             return this.$store.state.schadeAPI.schade;
         },
 

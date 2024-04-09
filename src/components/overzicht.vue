@@ -1,15 +1,17 @@
 <template>
     <section class=" md:grid md:justify-center bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
-       <schadeDataVue />
-        
+        <schadeDataVue />
+        <onderhoudDataVue />
        
     </section>
 </template>
 
 <script>
 import schadeDataVue from './schadeData.vue';
+import onderhoudDataVue from './onderhoudData.vue'
 
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+
 
 
 const db = getFirestore(); // connectie met de database firestore
@@ -21,6 +23,7 @@ export default {
     // Hier laad je alle componenten in die je importeert 
     components: { 
     schadeDataVue,
+    onderhoudDataVue,
     },
 
 
@@ -28,7 +31,7 @@ export default {
 
 
 
-const achterStallig = collection(db, 'AchterstalligOnderhoud'); // de data achterstalligonderhoud ophalen en variable geven
+
 const technischeInstallatie = collection(db, 'TechnischeInstallatie') // de data TechnischeInstallatie ophalen en variable geven
 const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data ModificatieInverntaris ophalen en variable geven
 
@@ -47,17 +50,17 @@ const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data
       //  console.log(error.message)
     //})
 // De variable verwerken in een array dmv een foreach loop
-getDocs(achterStallig)
-    .then((snapshot) => {
-       let achterstallig = []
-       snapshot.docs.forEach((doc) => {
-        achterstallig.push({...doc.data(), id: doc.id})
-       })
-       console.log(achterstallig)
-    })
-    .catch(error => {
-        console.log(error.message)
-    })
+//getDocs(achterStallig)
+  //  .then((snapshot) => {
+    //   let achterstallig = []
+      // snapshot.docs.forEach((doc) => {
+        //achterstallig.push({...doc.data(), id: doc.id})
+       //})
+       //console.log(achterstallig)
+    //})
+    //.catch(error => {
+      //  console.log(error.message)
+    //})
 
 // De variable verwerken in een array dmv een foreach loop
 getDocs(technischeInstallatie)

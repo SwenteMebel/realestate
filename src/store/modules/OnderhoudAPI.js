@@ -1,13 +1,13 @@
 import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
 const db = getFirestore();
-const schadeOpnemen = collection(db, 'SchadeOpnemen');
+const achterStallig = collection(db, 'AchterstalligOnderhoud');
 
 export default({
     namespaced: true,
 
     state: {
-       schade: [],
+       onderhoud: [],
        loadingStatus: 'notloading',
        error: [],   
     },
@@ -18,11 +18,11 @@ export default({
         },
 
         SET_DATA(state, payload){
-            state.schade = payload;
-            console.log(state.schade)
+            state.onderhoud = payload;
+            console.log(state.onderhoud)
         },
         CLEAR_DATA(state){
-            state.schade = [];
+            state.onderhoud = [];
         },
 
         SET_ERROR(state, payload){
@@ -31,17 +31,17 @@ export default({
     },
 
     actions:{
-        ophalenSchade(context){
-            
+        ophalenOnderhoud(context){
+            console.log('ophalenOnderhoud API is aan het laden.')
             context.commit('LOADING_STATUS', 'loading');
             
-            const data = onSnapshot(schadeOpnemen, (snapshot) => {
-                let schade = [];
+            const data = onSnapshot(achterStallig, (snapshot) => {
+                let onderhoud = [];
                 snapshot.docs.forEach((doc) => {
-                    schade.push({...doc.data(), id: doc.id})
+                    onderhoud.push({...doc.data(), id: doc.id})
                 });
                 context.commit('LOADING_STATUS', 'notloading');
-                context.commit('SET_DATA', schade);
+                context.commit('SET_DATA', onderhoud);
             }, error => {
                 context.commit('LOADING_STATUS', 'notloading');
                 context.commit('SET_DATA', [] );
