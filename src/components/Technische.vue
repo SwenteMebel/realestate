@@ -1,5 +1,5 @@
 <template>
-         <div class="border-x-2 border-b-2 border-black rounded-lg my-2 mb-8 px-2">
+         <div class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
                     <div class="flex">
                       <div class="flex mr-4">
                         <input class="w-4" type="radio" @click="toggleTechnische()" value="true" v-model="toggletechnische">
