@@ -12,7 +12,6 @@
             <p class="font-semibold" v-if="schadedata.Anders != '' ">Opmerking:<br>
             <span class="font-normal">{{ schadedata.AndersOmschrijving }}</span></p>
         </ul>
-        
         <p class="font-semibold">Acute Actie: <span class="font-normal">{{ schadedata.acuteActie  ? 'Ja' : 'Nee' }}</span></p>
         <p class="font-semibold">Omschrijving: <br><span class="font-normal">{{ schadedata.Omschrijving }}</span></p>
     </div>

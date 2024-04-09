@@ -86,8 +86,7 @@ export default {
             let schade = [];
             snapshot.docs.forEach((doc) => {
             schade.push({...doc.data(), id: doc.id})
-        })
-           
+            })
             this.schade = schade;
             console.log('this schade van mounted', this.schade)
            
