@@ -23,59 +23,6 @@ export default {
     schadeDataVue,
     },
 
-    data(){
-        return{
-            //opdrachtenData, // DATA van JSON bestand
-            selectedTaskIndex: 0, // Is het index getal waar het mee begint in de opdrachten array. 
-            toggle: false, //toggle voor taskDetails
-            schade: []
-        }
-    },
-
-   
-
-    methods: {
-        selectTask(index){
-            console.log('index = ' + index)
-          
-            this.selectedTaskIndex = index; // haalt het index getal uit de aangeklikte object.
-            console.log( this.selectedTaskIndex = index ) 
-            this.toggle = !this.toggle; // zet de toggle op false of true als er op gelikt wordt
-        },
-    
-    },
-
-    beforeCreate() {
-        console.log('beforecreate word geladen')
-        this.$store.dispatch('schadeAPI/ophalenSchade') // roept naar de functie ophalenSchade in de Axios API 
-    },
-
-    computed: {
-    
-        selectTaskData(){
-            return { // selecteerd en kopieert de opdrachten array uit het object en zet het in de selectedTaskIndex
-                ...this.schade[this.selectedTaskIndex]
-            }
-        },
-
-        schades() {
-            console.log('dit is data van schades functie ' , this.$store.state.schadeAPI.schade)
-            return this.$store.state.schadeAPI.schade;
-        },
-
-        loadingStatus() {
-            return this.$store.state.schadeAPI.loadingStatus;
-        },
-
-        error() {
-            return this.$store.state.schadeAPI.error;
-        }
-
-
-    },
-
-
-
 
 }
 

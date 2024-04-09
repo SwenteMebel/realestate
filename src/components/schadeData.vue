@@ -1,6 +1,5 @@
 <template>
-    <section class=" md:grid md:justify-center bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
-       
+ 
         
     <div if="loadingStatus === loading">
         <div v-if="schade && schades.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
@@ -16,7 +15,7 @@
         </div>
     </div>
        
-    </section>
+  
 </template>
 
 <script>
@@ -88,3 +87,4 @@ export default {
 
 
 }
+</script>
