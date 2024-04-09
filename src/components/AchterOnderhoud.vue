@@ -8,19 +8,20 @@
                         <h1 class="text-center text-lg font-semibold">Achterstallig onderhoud opnemen</h1>
                       </div>
                     </div>
-                    <form v-on:submit="addOnderhoud()" v-if="toggleonderhoud" >
-                        <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie"><br>
+                    <form v-on:submit="addOnderhoud" v-if="toggleonderhoud" >
+                        <span>{{ error }}</span>
+                        <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie" required><br>
                         <span class="font-semibold">Soort Onderhoud:</span><br>
-                        <input class="w-[20px] h-[15px]" type="checkbox" v-model="schilderwerk"> <span>Schilderwerk</span><br>
-                        <input class="w-[20px] h-[15px]" type="checkbox" v-model="houtrot"> <span>Houtrot</span><br>
-                        <input class="w-[20px] h-[15px]" type="checkbox" v-model="elektraOnderhoud"> <span>Elektra</span><br>
-                        <input class="w-[20px] h-[15px]" type="checkbox" v-model="leidingwerk"> <span>Leidingwerk</span><br>
-                        <input class="w-[20px] h-[15px]" type="checkbox" v-model="beglazing"> <span>Beglazing</span><br>
+                        <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleschilderwerk()" v-model="schilderwerk"> <span>Schilderwerk</span><br>
+                        <input class="w-[20px] h-[15px]" type="radio" value="true" @click="togglehoutrot()" v-model="houtrot"> <span>Houtrot</span><br>
+                        <input class="w-[20px] h-[15px]" type="radio" value="true" @click="togglelektraOnderhoud()" v-model="elektraOnderhoud"> <span>Elektra</span><br>
+                        <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleleidingwerk()" v-model="leidingwerk"> <span>Leidingwerk</span><br>
+                        <input class="w-[20px] h-[15px]" type="radio" value="true" @click="togglebeglazing()" v-model="beglazing"> <span>Beglazing</span><br>
                         <span class="font-semibold">Acute actie vereist: </span> <input class="w-[20px] h-[15px]" type="radio" v-model="actie" value="true" @click="actieOnderhoud()" ><br>
                         <span class="font-semibold">Kostenindicatie </span>
-                        <select class="border-2 border-black rounded-lg mb-3 " v-model="kostenindicatie" placeholder="Kosten">
-                          <option class="" value="0_500">€0-500</option>
-                          <option class="" value="500_1500">€500-1.500</option>
+                        <select class="border-2 border-black rounded-lg mb-3 " v-model="kostenindicatie" placeholder="Kosten" required>
+                          <option class="" value="0-500">€0-500</option>
+                          <option class="" value="500-1500">€500-1.500</option>
                           <option class="" value="1500">€1.500+</option>
                         </select><br>
                         <input class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear" type="submit" value="Versturen">
@@ -35,7 +36,7 @@
   import { initializeApp } from 'firebase/app'; 
   import { firebaseConfig } from '@/store/FirebaseConfig' 
   import { getFirestore, collection, addDoc} from 'firebase/firestore';
-  import { ref } from 'vue';
+  
 
   initializeApp(firebaseConfig) //defineert de db in de app.
    
@@ -46,31 +47,44 @@
 export default {
    name: 'AchterOnderhoudVue',
 
- data(){
-   return{
+  data(){
+    return{
       toggleonderhoud: false, // Formulier onderhoud openen.
       actieonderhoud: false, // Actie vereist bij onderhoud opnemen
 
-      locatie: ref(''),
-      schilderwerk: ref(''),
-      houtrot: ref(''),
-      elektraOnderhoud: ref(''),
-      leidingwerk: ref(''),
-      beglazing: ref(''),
-      actie: ref(''),
-      kostenindicatie: ref(''),
-   }
- },
+      locatie: '',
+      schilderwerk: false,
+      houtrot: false,
+      elektraOnderhoud: false,
+      leidingwerk: false,
+      beglazing: false,
+      actie: false,
+      kostenindicatie: '',
+    }
+  },
 
- methods:{
+  methods:{
     toggleOnderhoud(){ // Formulier onderhoud openen
         this.toggleonderhoud = !this.toggleonderhoud;
     },
-
     actieOnderhoud(){ // Actie vereist bij onderhoud opnemen
-        this.actieonderhoud = !this.actieonderhoud;
+        this.actie = !this.actie;
     },
-
+    toggleschilderwerk(){
+        this.schilderwerk = !this.schilderwerk;
+    },
+    togglehoutrot(){
+        this.houtrot = !this.houtrot;
+    },
+    togglelektraOnderhoud(){
+      this.elektraOnderhoud = !this.elektraOnderhoud;
+    },
+    toggleleidingwerk(){
+      this.leidingwerk = !this.leidingwerk;
+    },
+    togglebeglazing(){
+      this.beglazing = !this.beglazing;
+    },
     addOnderhoud(){ // Voeg schade toe aan de database table SchadeOpnemen.
        addDoc(achterstalligOnderhoud, {
          locatie: this.locatie,
@@ -83,15 +97,15 @@ export default {
          Kosten: this.kostenindicatie,
          
        })
-       
        .then(() => {
           alert('Nieuwe schade is toegevoegd.')
        })
        .catch(error => {
          alert(error.message)
+         
        })
       
     },
- }
+  }
 }
 </script>

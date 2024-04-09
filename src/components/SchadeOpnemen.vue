@@ -121,12 +121,12 @@ export default {
         
         .then(() => {
           alert('Nieuwe schade is toegevoegd.')
-      
+          
         })
         .catch(error => {
           alert(error.message)
         })
-       
+        
       },
   },
 }
