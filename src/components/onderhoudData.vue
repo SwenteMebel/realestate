@@ -2,14 +2,15 @@
  
         
     <div if="loadingStatus === loading">
-        <div v-if="schade && schades.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
+        <div v-if="Onderhoud && Onderhoud.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
+            <h1 class="grid justify-center text-xl font-semibold text-white">Achterstallig Onderhoud</h1>
             <div v-for="onderhoud, index in Onderhoud" :key="onderhoud.id" @click="selectTask(index)" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
                 <p class="font-semibold">Soort opdracht: <span class="font-normal">Achterstallig Onderhoud</span></p>
                 <p class="font-semibold">Schade Nummer: <span class="font-normal">{{ onderhoud.id }}</span></p>
                 <p class="font-semibold">Locatie: <span class="font-normal">{{ onderhoud.locatie }}</span></p>
-                <p class="font-semibold" >Datum: <span class="font-normal">{{ onderhoud.Datum }}</span></p>
                 
-                <taskData  v-if="toggle && selectedTaskIndex === index" :onderhoudData="Onderhoud" />
+                
+                <detailOnderhoud  v-if="toggle && selectedTaskIndex === index" :onderhoudData="onderhoud" />
 
             </div>
         </div>
@@ -20,8 +21,8 @@
 
 <script>
 
-import taskData from '../components/taskData.vue'
 
+import detailOnderhoud from './detailOnderhoud.vue';
 
 
 export default {  
@@ -29,7 +30,7 @@ export default {
   
     // Hier laad je alle componenten in die je importeert 
     components: { 
-    taskData,
+        detailOnderhoud,
     },
 
     data(){
@@ -54,7 +55,7 @@ export default {
     },
 
     beforeCreate() {
-        console.log('beforecreate word geladen')
+       
         this.$store.dispatch('OnderhoudAPI/ophalenOnderhoud') // roept naar de functie OnderhoudAPI in de Axios API 
     },
 
@@ -67,7 +68,6 @@ export default {
         },
 
         Onderhoud() {
-            console.log('onderhoudData  ' , this.$store.state.OnderhoudAPI.onderhoud)
             return this.$store.state.OnderhoudAPI.onderhoud;
         },
 

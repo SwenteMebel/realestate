@@ -1,13 +1,13 @@
 import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
 const db = getFirestore();
-const schadeOpnemen = collection(db, 'SchadeOpnemen');
+const technischeInstallatie = collection(db, 'TechnischeInstallatie') // de data TechnischeInstallatie ophalen en variable geven
 
 export default({
     namespaced: true,
 
     state: {
-       schade: [],
+       technisch: [],
        loadingStatus: 'notloading',
        error: [],   
     },
@@ -18,11 +18,11 @@ export default({
         },
 
         SET_DATA(state, payload){
-            state.schade = payload;
-            
+            state.technisch = payload;
+            console.log(state.technisch)
         },
         CLEAR_DATA(state){
-            state.schade = [];
+            state.technisch = [];
         },
 
         SET_ERROR(state, payload){
@@ -31,17 +31,17 @@ export default({
     },
 
     actions:{
-        ophalenSchade(context){
+        ophalenTechnisch(context){
             
             context.commit('LOADING_STATUS', 'loading');
             
-            const data = onSnapshot(schadeOpnemen, (snapshot) => {
-                let schade = [];
+            const data = onSnapshot(technischeInstallatie, (snapshot) => {
+                let technisch = [];
                 snapshot.docs.forEach((doc) => {
-                    schade.push({...doc.data(), id: doc.id})
+                    technisch.push({...doc.data(), id: doc.id})
                 });
                 context.commit('LOADING_STATUS', 'notloading');
-                context.commit('SET_DATA', schade);
+                context.commit('SET_DATA', technisch);
             }, error => {
                 context.commit('LOADING_STATUS', 'notloading');
                 context.commit('SET_DATA', [] );

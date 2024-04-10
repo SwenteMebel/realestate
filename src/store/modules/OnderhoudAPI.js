@@ -19,7 +19,6 @@ export default({
 
         SET_DATA(state, payload){
             state.onderhoud = payload;
-            console.log(state.onderhoud)
         },
         CLEAR_DATA(state){
             state.onderhoud = [];
@@ -32,7 +31,7 @@ export default({
 
     actions:{
         ophalenOnderhoud(context){
-            console.log('ophalenOnderhoud API is aan het laden.')
+            
             context.commit('LOADING_STATUS', 'loading');
             
             const data = onSnapshot(achterStallig, (snapshot) => {

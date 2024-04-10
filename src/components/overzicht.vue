@@ -2,13 +2,14 @@
     <section class=" md:grid md:justify-center bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
         <schadeDataVue />
         <onderhoudDataVue />
-       
+        <technischeDataVue />
     </section>
 </template>
 
 <script>
 import schadeDataVue from './schadeData.vue';
 import onderhoudDataVue from './onderhoudData.vue'
+import technischeDataVue from './technischeData.vue';
 
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
@@ -24,6 +25,7 @@ export default {
     components: { 
     schadeDataVue,
     onderhoudDataVue,
+    technischeDataVue,
     },
 
 
@@ -32,7 +34,7 @@ export default {
 
 
 
-const technischeInstallatie = collection(db, 'TechnischeInstallatie') // de data TechnischeInstallatie ophalen en variable geven
+
 const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data ModificatieInverntaris ophalen en variable geven
 
 // De variable verwerken in een array dmv een foreach loop
@@ -63,17 +65,17 @@ const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data
     //})
 
 // De variable verwerken in een array dmv een foreach loop
-getDocs(technischeInstallatie)
-    .then((snapshot) => {
-       let technisch = []
-       snapshot.docs.forEach((doc) => {
-        technisch.push({...doc.data(), id: doc.id})
-       })
-       console.log(technisch)
-    })
-    .catch(error => {
-        console.log(error.message)
-    })
+//getDocs(technischeInstallatie)
+  //  .then((snapshot) => {
+    //   let technisch = []
+      // snapshot.docs.forEach((doc) => {
+        //technisch.push({...doc.data(), id: doc.id})
+       //})
+       //console.log(technisch)
+    //})
+    //.catch(error => {
+       // console.log(error.message)
+    //})
 
     getDocs(modificatieInventaris)
         .then((snapshot) => {
