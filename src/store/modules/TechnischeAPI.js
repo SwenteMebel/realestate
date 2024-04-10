@@ -1,13 +1,13 @@
 import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
 const db = getFirestore();
-const technischeInstallatie = collection(db, 'TechnischeInstallatie') // de data TechnischeInstallatie ophalen en variable geven
+const technischeeInstallatie = collection(db, 'technischeeInstallatie') // de data technischeeInstallatie ophalen en variable geven
 
 export default({
     namespaced: true,
 
     state: {
-       technisch: [],
+       technische: [],
        loadingStatus: 'notloading',
        error: [],   
     },
@@ -18,11 +18,11 @@ export default({
         },
 
         SET_DATA(state, payload){
-            state.technisch = payload;
-            console.log(state.technisch)
+            state.technische = payload;
+            console.log(state.technische)
         },
         CLEAR_DATA(state){
-            state.technisch = [];
+            state.technische = [];
         },
 
         SET_ERROR(state, payload){
@@ -31,17 +31,17 @@ export default({
     },
 
     actions:{
-        ophalenTechnisch(context){
+        ophalentechnische(context){
             
             context.commit('LOADING_STATUS', 'loading');
             
-            const data = onSnapshot(technischeInstallatie, (snapshot) => {
-                let technisch = [];
+            const data = onSnapshot(technischeeInstallatie, (snapshot) => {
+                let technische = [];
                 snapshot.docs.forEach((doc) => {
-                    technisch.push({...doc.data(), id: doc.id})
+                    technische.push({...doc.data(), id: doc.id})
                 });
                 context.commit('LOADING_STATUS', 'notloading');
-                context.commit('SET_DATA', technisch);
+                context.commit('SET_DATA', technische);
             }, error => {
                 context.commit('LOADING_STATUS', 'notloading');
                 context.commit('SET_DATA', [] );

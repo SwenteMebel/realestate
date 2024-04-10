@@ -119,8 +119,9 @@ export default {
           
         })
         
-        .then(() => {
+        .then((e) => {
           alert('Nieuwe schade is toegevoegd.')
+          e.preventDefault();
           
         })
         .catch(error => {

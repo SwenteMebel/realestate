@@ -8,20 +8,20 @@
                         <h1 class="text-center text-lg font-semibold">Technische installatie inspecteren</h1>
                       </div>
                     </div>
-                    <form v-if="toggletechnische" class="">
-                      <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie"><br>
+                    <form v-on:submit="addTechnisch" v-if="toggletechnische" class="">
+                      <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie" required><br>
                       <span class="font-semibold">Soort installatie:</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="koeling"> <span>Koeling</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="verwarming"> <span>Verwarming</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="luchtverversing"> <span>Luchtverversing</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="elektra"> <span>Elektra</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="beveiliging"> <span>Beveiliging</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleKoeling()" value="true" v-model="koeling"> <span>Koeling</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleVerwarming()" value="true" v-model="verwarming"> <span>Verwarming</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleLuchtverversing()" value="true" v-model="luchtverversing"> <span>Luchtverversing</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleElektra()" value="true" v-model="elektra"> <span>Elektra</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleBeveiliging()" value="true" v-model="beveiliging"> <span>Beveiliging</span><br>
                       <span class="font-semibold">Gemelde storing: </span><br>
                       <span class="">[Gemelde storing]</span><br>
                       <span class="font-semibold">Test procedure: </span> <span>[Link naar bestand]</span><br>
                       <span class="font-semibold">Goed gekeurd: </span> <input type="radio" v-model="goedgekeurd" value="true" @click="goedGekeurd()"><br>
                       <span class="font-semibold">Opmerking: </span><br>
-                      <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" placeholder="Opmerking..."></textarea><br>
+                      <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" v-model="opmerkingTechnisch" placeholder="Opmerking..." required></textarea><br>
                       <input class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear" type="submit" value="Versturen">
                     </form> 
                   </div>
@@ -30,7 +30,6 @@
 
 <script>
    
-   import { ref } from 'vue'
    import { initializeApp } from 'firebase/app'; 
    import { firebaseConfig } from '@/store/FirebaseConfig' 
    import { getFirestore, collection, addDoc} from 'firebase/firestore';
@@ -49,17 +48,14 @@ export default {
         toggletechnische: false, // Formulier technisch openen.
         goedgekeurd: false, // Goed keuring in formulier technische installatie
        // data voor Schade opnemen. 
-       schadeLocatie: ref(''), 
-       schadeNieuw: ref(''), 
-       schadeMoedwillig: ref(''), 
-       schadeSlijtage: ref(''), 
-       schadeGeweld: ref(''), 
-       schadeNormaalGebruik: ref(''), 
-       schadeCalamiteit: ref(''), 
-       schadeAnders: ref(''), 
-       schadeDatum: ref(''), 
-       schadeActie: ref(''), 
-       schadeOmschrijving:ref(''),
+        locatie: '',
+        koeling: false,
+        verwarming: false,
+        luchtverversing: false,
+        elektra: false,
+        beveiliging: false,
+        opmerkingTechnisch: '',
+
    }
  },
 
@@ -70,24 +66,37 @@ export default {
     goedGekeurd(){ // Goed keuring in formulier technische installatie
         this.goedgekeurd = !this.goedgekeurd;
     },
+    toggleKoeling(){ // Goed keuring in formulier technische installatie
+        this.koeling = !this.koeling;
+    },
+    toggleVerwarming(){
+      this.verwarming = !this.verwarming;
+    },
+    toggleLuchtverversing(){
+      this.luchtverversing = !this.luchtverversing;
+    },
+    toggleElektra(){
+      this.elektra = !this.elektra;
+    },
+    toggleBeveiliging(){
+      this.beveiliging =  !this.beveiliging; 
+    },
 
-    addSchade(){ // Voeg schade toe aan de database table SchadeOpnemen.
+
+    addTechnisch(){ // Voeg schade toe aan de database table SchadeOpnemen.
        addDoc(technische, {
-         locatie: this.schadeLocatie,
-         nieuweSchade: this.schadeNieuw,
-         Moedwillig: this.schadeMoedwillig,
-         Slijtage: this.schadeSlijtage,
-         Geweld: this.schadeGeweld,
-         NormaalGebruik: this.schadeNormaalGebruik,
-         Calamiteit: this.schadeCalamiteit,
-         Anders: this.schadeAnders,
-         Datum: this.schadeDatum,
-         acuteActie: this.schadeActie,
-         Omschrijving: this.schadeOmschrijving,
+         locatie: this.locatie,
+         koeling: this.koeling,
+         verwarming: this.verwarming,
+         luchtverversing: this.luchtverversing,
+         elektra: this.elektra,
+         beveiliging: this.beveiliging,
+         opmerking: this.opmerkingTechnisch,
+         goedgekeurd: this.goedgekeurd,
        })
-       alert('Nieuwe schade is toegevoegd.')
-       .then((e) => {
-         e.preventDefault();
+       
+       .then(() => {
+        alert('Nieuwe schade is toegevoegd.')
        })
        .catch(error => {
          console.log(error.message)
