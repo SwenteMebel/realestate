@@ -14,6 +14,7 @@
         </ul>
         <p class="font-semibold">Acute Actie: <span class="font-normal">{{ schadedata.acuteActie  ? 'Ja' : 'Nee' }}</span></p>
         <p class="font-semibold">Omschrijving: <br><span class="font-normal">{{ schadedata.Omschrijving }}</span></p>
+        <input @click="removeItem(schadedata.id)" value="Delete" type="submit" class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear">
     </div>
 </template>
 
@@ -31,6 +32,13 @@ export default {
     'schadedata' 
     ],
    
-   
+   methods: {
+    removeItem(item){
+        const itemId = item
+        console.log(item)
+        alert('klik ' + typeof(itemId))
+        this.$store.dispatch('schadeAPI/deleteItem', 'itemId')
+    },
+   }
 }
 </script>

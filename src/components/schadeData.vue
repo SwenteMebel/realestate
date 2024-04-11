@@ -4,15 +4,18 @@
     <div if="loadingStatus === loading">
         <div v-if="schade && schades.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
             <h1 class="grid justify-center text-xl font-semibold text-white">Schade Opnemen</h1>
-            <div v-for="schadedata, index in schades" :key="schadedata.id" @click="selectTask(index)" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
-                <p class="font-semibold">Soort opdracht: <span class="font-normal">Schade Opnemen</span></p>
-                <p class="font-semibold">Schade Nummer: <span class="font-normal">{{ schadedata.id }}</span></p>
-                <p class="font-semibold">Locatie: <span class="font-normal">{{ schadedata.locatie }}</span></p>
-                <p class="font-semibold" >Datum: <span class="font-normal">{{ schadedata.Datum }}</span></p>
+            <div v-for="schadedata, index in schades" :key="schadedata.id" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
+                <div @click="selectTask(index)" >
+                    <p class="font-semibold">Soort opdracht: <span class="font-normal">Schade Opnemen</span></p>
+                    <p class="font-semibold">Schade Nummer: <span class="font-normal">{{ schadedata.id }}</span></p>
+                    <p class="font-semibold">Locatie: <span class="font-normal">{{ schadedata.locatie }}</span></p>
+                    <p class="font-semibold" >Datum: <span class="font-normal">{{ schadedata.Datum }}</span></p>
+                    <detailSchade  v-if="toggle && selectedTaskIndex === index" :schadedata="schadedata" />
+                </div>
                 
-                <detailSchade  v-if="toggle && selectedTaskIndex === index" :schadedata="schadedata" />
-               
             </div>
+          
+            
         </div>
     </div>
        
@@ -52,11 +55,12 @@ export default {
             console.log( this.selectedTaskIndex = index ) 
             this.toggle = !this.toggle; // zet de toggle op false of true als er op gelikt wordt
         },
-    
+
+       
+ 
     },
 
     beforeCreate() {
-     
         this.$store.dispatch('schadeAPI/ophalenSchade') // roept naar de functie ophalenSchade in de Axios API 
     },
 

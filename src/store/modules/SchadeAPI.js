@@ -1,4 +1,4 @@
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, deleteDoc, doc} from 'firebase/firestore';
 
 const db = getFirestore();
 const schadeOpnemen = collection(db, 'SchadeOpnemen');
@@ -25,6 +25,10 @@ export default({
             state.schade = [];
         },
 
+        REMOVE_DATA(state, itemId){
+            state.schade = state.schade.filter(item => item.id !== itemId)
+        },
+
         SET_ERROR(state, payload){
             state.error.push(payload);
         }
@@ -49,6 +53,21 @@ export default({
             });
             return data;
         },
+
+
+        async deleteItem(itemId){
+            try{
+                console.log('delete knop in API call ' + itemId)
+                const docDelete = doc(db, schadeOpnemen, itemId);
+                await deleteDoc(docDelete)
+                alert('delete geslaagd')
+            } catch (error){
+                console.log(error)
+            }
+            
+               
+            
+        }
     },
 
     modules: {
