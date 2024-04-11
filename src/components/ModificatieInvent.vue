@@ -8,22 +8,24 @@
                         <h1 class="text-center text-lg font-semibold">Modificaties inventariseren</h1>
                       </div>
                     </div>
-                    <form v-if="togglemodificatie" class="">
+                    <form v-on:submit="addModificatie" v-if="togglemodificatie" class="">
+                      <span v-if="toegevoegd >= 1"> {{ toegevoegd }}</span>
+                      <span v-if="error >= 1">{{ error }}</span>
                       <span class="font-semibold">Bestaande Modificaties:</span> <span>[Link bestaande inventarisatie]</span><br>
-                      <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2 w-[16.5rem]" type="text" v-model="locatieAangetroffen" placeholder="Locatie aangetroffen modificaties"><br>
+                      <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2 " type="text" v-model="locatie" placeholder="Locatie" required><br>
                       <span class="font-semibold">Uitgevoerd door: </span>
-                      <select v-model="uitgevoerd" class="border-2 border-black rounded-lg mt-1 ">
+                      <select v-model="uitgevoerd" class="border-2 border-black rounded-lg mt-1" required>
                         <option value="huurder">Huurder</option>
                         <option value="aannemer">Aannemer</option>
                         <option value="onbekend">Onbekend</option>
                       </select><br>
                       <span class="font-semibold">Beschrijving Modificatie</span><br>
-                      <textarea v-model="beschrModi" class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" placeholder="Beschrijving"></textarea><br>
+                      <textarea v-model="beschrijving" class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" placeholder="Beschrijving" required></textarea><br>
                       <span class="font-semibold">Te ondernemen actie</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="accepteren"> <span>Accepteren</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="keuren"> <span>Laten keuren</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="verwijderen"> <span>Laten verwijderen</span><br>
-                      <input class="w-[20px] h-[15px]" type="checkbox" v-model="aanpassenKeuren"> <span>Laten aanpassen en keuren</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleAccepteren()" v-model="accepteren"> <span>Accepteren</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleKeuren()" v-model="keuren"> <span>Laten keuren</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleVerwijderen()" v-model="verwijderen"> <span>Laten verwijderen</span><br>
+                      <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleAanpassenKeuren()" v-model="aanpassenKeuren"> <span>Laten aanpassen en keuren</span><br>
                       <input class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear" type="submit" value="Versturen">
                     </form> 
                   </div>
@@ -32,7 +34,7 @@
 
 <script>
 
-import { ref } from 'vue'
+
 import { initializeApp } from 'firebase/app'; 
 import { firebaseConfig } from '@/store/FirebaseConfig' 
 import { getFirestore, collection, addDoc} from 'firebase/firestore';
@@ -49,20 +51,18 @@ name: 'ModificatieVue',
 data(){
 return{
     togglemodificatie: false, // formulier modificatie openen.
-
+    toegevoegd: '',
+    error: '',
 
   // data voor Schade opnemen. 
-  schadeLocatie: ref(''), 
-  schadeNieuw: ref(''), 
-  schadeMoedwillig: ref(''), 
-  schadeSlijtage: ref(''), 
-  schadeGeweld: ref(''), 
-  schadeNormaalGebruik: ref(''), 
-  schadeCalamiteit: ref(''), 
-  schadeAnders: ref(''), 
-  schadeDatum: ref(''), 
-  schadeActie: ref(''), 
-  schadeOmschrijving:ref(''),
+  locatie: '',
+  uitgevoerd: '',
+  beschrijving: '',
+  accepteren: false,
+  keuren: false,
+  verwijderen:  false,
+  aanpassenKeuren:  false,
+ 
 }
 },
 
@@ -71,30 +71,39 @@ methods:{
     toggleModificatie(){ // formulier modificatie openen.
         this.togglemodificatie = !this.togglemodificatie;
     },
-          
-    addSchade(){ // Voeg schade toe aan de database table SchadeOpnemen.
-        addDoc(modificatieInventaris, {
-            locatie: this.schadeLocatie,
-            nieuweSchade: this.schadeNieuw,
-            Moedwillig: this.schadeMoedwillig,
-            Slijtage: this.schadeSlijtage,
-            Geweld: this.schadeGeweld,
-            NormaalGebruik: this.schadeNormaalGebruik,
-            Calamiteit: this.schadeCalamiteit,
-            Anders: this.schadeAnders,
-            Datum: this.schadeDatum,
-            acuteActie: this.schadeActie,
-            Omschrijving: this.schadeOmschrijving,
-        })
-        alert('Nieuwe schade is toegevoegd.')
-        .then((e) => {
-            e.preventDefault();
-        })
-        .catch(error => {
-            console.log(error.message)
-        })
- 
+    toggleAccepteren(){
+      this.accepteren = !this.accepteren;
     },
-}
+    toggleKeuren(){
+      this.kleuren = !this.keuren;
+    },
+    toggleVerwijderen(){
+      this.verwijderen = !this.verwijderen;
+    },
+    toggleAanpassenKeuren(){
+      this.aanpassenKeuren = !this.aanpassenKeuren
+    },
+    
+    
+
+    async addModificatie(){ // Voeg schade toe aan de database table SchadeOpnemen.
+      try {
+        addDoc(modificatieInventaris, {
+          locatie: this.locatie,
+          uitgevoerd: this.uitgevoerd,
+          beschrijving: this.beschrijving,
+          keuren: this.keuren,
+          accepteren: this.accepteren,
+          verwijderen: this.verwijderen,
+          aanpassenKeuren: this.aanpassenKeuren,
+          
+      });
+        alert('Nieuwe schade is toegevoegd.')
+        this.toegevoegd = 'schade is toegevoegd.'
+      } catch (error){
+        this.error = error
+      }
+    },
+  }
 }
 </script>

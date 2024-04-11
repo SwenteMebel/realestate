@@ -16,9 +16,6 @@
                       <input class="w-[20px] h-[15px]" type="radio" @click="toggleLuchtverversing()" value="true" v-model="luchtverversing"> <span>Luchtverversing</span><br>
                       <input class="w-[20px] h-[15px]" type="radio" @click="toggleElektra()" value="true" v-model="elektra"> <span>Elektra</span><br>
                       <input class="w-[20px] h-[15px]" type="radio" @click="toggleBeveiliging()" value="true" v-model="beveiliging"> <span>Beveiliging</span><br>
-                      <span class="font-semibold">Gemelde storing: </span><br>
-                      <span class="">[Gemelde storing]</span><br>
-                      <span class="font-semibold">Test procedure: </span> <span>[Link naar bestand]</span><br>
                       <span class="font-semibold">Goed gekeurd: </span> <input type="radio" v-model="goedgekeurd" value="true" @click="goedGekeurd()"><br>
                       <span class="font-semibold">Opmerking: </span><br>
                       <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" v-model="opmerkingTechnisch" placeholder="Opmerking..." required></textarea><br>
@@ -46,7 +43,7 @@ export default {
  data(){
    return{
         toggletechnische: false, // Formulier technisch openen.
-        goedgekeurd: false, // Goed keuring in formulier technische installatie
+        
        // data voor Schade opnemen. 
         locatie: '',
         koeling: false,
@@ -55,7 +52,7 @@ export default {
         elektra: false,
         beveiliging: false,
         opmerkingTechnisch: '',
-
+        goedgekeurd: false,
    }
  },
 
@@ -83,26 +80,23 @@ export default {
     },
 
 
-    addTechnisch(){ // Voeg schade toe aan de database table SchadeOpnemen.
-       addDoc(technische, {
-         locatie: this.locatie,
-         koeling: this.koeling,
-         verwarming: this.verwarming,
-         luchtverversing: this.luchtverversing,
-         elektra: this.elektra,
-         beveiliging: this.beveiliging,
-         opmerking: this.opmerkingTechnisch,
-         goedgekeurd: this.goedgekeurd,
-       })
-       
-       .then(() => {
-        alert('Nieuwe schade is toegevoegd.')
-       })
-       .catch(error => {
-         console.log(error.message)
-       })
-      
-    },
+    async addTechnisch() { 
+      try {
+        await addDoc(technische, {
+          locatie: this.locatie,
+          koeling: this.koeling,
+          verwarming: this.verwarming,
+          luchtverversing: this.luchtverversing,
+          elektra: this.elektra,
+          beveiliging: this.beveiliging,
+          opmerking: this.opmerkingTechnisch,
+          goedgekeurd: this.goedgekeurd,
+        });
+        alert('Nieuwe schade is toegevoegd.');
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
  }
 }
 </script>

@@ -3,7 +3,7 @@
         
     <div if="loadingStatus === loading">
         <div v-if="technische && ophalenTechnisch.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
-            <h1 class="grid justify-center text-xl font-semibold text-white">Nieuwe technische installatie</h1>
+            <h1 class="grid justify-center text-xl font-semibold text-white">Technische installatie</h1>
             <div v-for="technische, index in ophalenTechnisch" :key="technische.id" @click="selectTask(index)" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
                 <p class="font-semibold">Soort opdracht: <span class="font-normal">Technische Installatie</span></p>
                 <p class="font-semibold">Technisch Nummer: <span class="font-normal">{{ technische.id }}</span></p>
@@ -53,8 +53,8 @@ export default {
     },
 
     beforeCreate() {
-        console.log('beforecreate word geladenin technisch ')
-        this.$store.dispatch('TechnischeAPI/ophalenTechnisch') // roept naar de functie OnderhoudAPI in de Axios API 
+      
+        this.$store.dispatch('TechnischeAPI/ophalentechnische') // roept naar de functie OnderhoudAPI in de Axios API 
     },
 
     computed: {
@@ -66,8 +66,7 @@ export default {
         },
 
         ophalenTechnisch() {
-            console.log('Technische data  ' , this.$store.state.TechnischeAPI.technische)
-            return this.$store.state.TechnischAPI.technische;
+            return this.$store.state.TechnischeAPI.technische;
         },
 
         loadingStatus() {

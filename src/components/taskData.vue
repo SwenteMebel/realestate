@@ -1,3 +1,5 @@
+<!-- Deze is niet meer in gebruik 
+
 <template>
 
     <div >
@@ -34,3 +36,4 @@ export default {
    
 }
 </script>
+-->

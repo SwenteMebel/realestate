@@ -3,6 +3,7 @@
         <schadeDataVue />
         <onderhoudDataVue />
         <technischeDataVue />
+        <modificatieDataVue />
     </section>
 </template>
 
@@ -10,12 +11,8 @@
 import schadeDataVue from './schadeData.vue';
 import onderhoudDataVue from './onderhoudData.vue'
 import technischeDataVue from './technischeData.vue';
+import modificatieDataVue from './modificatieData.vue';
 
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-
-
-
-const db = getFirestore(); // connectie met de database firestore
 
 
 export default {  
@@ -26,68 +23,12 @@ export default {
     schadeDataVue,
     onderhoudDataVue,
     technischeDataVue,
+    modificatieDataVue,
     },
 
 
 }
 
-
-
-
-
-const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data ModificatieInverntaris ophalen en variable geven
-
-// De variable verwerken in een array dmv een foreach loop
-
-
-//getDocs(schadeOpnemen)
-  //  .then((snapshot) => {
-    //   let schade = []
-      // snapshot.docs.forEach((doc) => {
-        //    schade.push({...doc.data(), id: doc.id})
-       //})
-       //console.log(schade)
-    //})
-    //.catch(error => {
-      //  console.log(error.message)
-    //})
-// De variable verwerken in een array dmv een foreach loop
-//getDocs(achterStallig)
-  //  .then((snapshot) => {
-    //   let achterstallig = []
-      // snapshot.docs.forEach((doc) => {
-        //achterstallig.push({...doc.data(), id: doc.id})
-       //})
-       //console.log(achterstallig)
-    //})
-    //.catch(error => {
-      //  console.log(error.message)
-    //})
-
-// De variable verwerken in een array dmv een foreach loop
-//getDocs(technischeInstallatie)
-  //  .then((snapshot) => {
-    //   let technisch = []
-      // snapshot.docs.forEach((doc) => {
-        //technisch.push({...doc.data(), id: doc.id})
-       //})
-       //console.log(technisch)
-    //})
-    //.catch(error => {
-       // console.log(error.message)
-    //})
-
-    getDocs(modificatieInventaris)
-        .then((snapshot) => {
-            let modificatie = []
-            snapshot.docs.forEach((doc) => {
-                modificatie.push({...doc.data(), id: doc.id})
-            }) 
-            console.log(modificatie)
-        })
-        .catch(error =>{
-            console.log(error.message)
-        })
 
 
 

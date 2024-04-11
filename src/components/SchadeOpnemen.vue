@@ -101,9 +101,11 @@ export default {
     actieToggleSchade(){// Actue actie versies bij Schade opnemen. 
         this.schadeActie = !this.schadeActie;
     },
-      addSchade(){ // Voeg schade toe aan de database table SchadeOpnemen.
-        
-        addDoc(schadeOpnemen, {
+
+
+    async addSchade(){ // Voeg schade toe aan de database table SchadeOpnemen.
+      try {
+          addDoc(schadeOpnemen, {
           locatie: this.schadeLocatie,
           nieuweSchade: this.schadeNieuw,
           Moedwillig: this.schadeMoedwillig,
@@ -116,19 +118,12 @@ export default {
           Datum: this.schadeDatum,
           acuteActie: this.schadeActie,
           Omschrijving: this.schadeOmschrijving,
-          
-        })
-        
-        .then((e) => {
-          alert('Nieuwe schade is toegevoegd.')
-          e.preventDefault();
-          
-        })
-        .catch(error => {
-          alert(error.message)
-        })
-        
-      },
+        });
+        alert('Nieuwe schade is toegevoegd.')
+      } catch (error){
+        console.log(error)
+      }
+    },
   },
 }
 </script>

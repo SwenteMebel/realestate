@@ -9,7 +9,7 @@
                       </div>
                     </div>
                     <form v-on:submit="addOnderhoud" v-if="toggleonderhoud" >
-                        <span>{{ error }}</span>
+                        <span if="error >= 1">{{ error }}</span>
                         <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie" required><br>
                         <span class="font-semibold">Soort Onderhoud:</span><br>
                         <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleschilderwerk()" v-model="schilderwerk"> <span>Schilderwerk</span><br>
@@ -51,7 +51,7 @@ export default {
     return{
       toggleonderhoud: false, // Formulier onderhoud openen.
       actieonderhoud: false, // Actie vereist bij onderhoud opnemen
-
+      error: '',
       locatie: '',
       schilderwerk: false,
       houtrot: false,
@@ -85,26 +85,26 @@ export default {
     togglebeglazing(){
       this.beglazing = !this.beglazing;
     },
-    addOnderhoud(){ // Voeg schade toe aan de database table SchadeOpnemen.
-       addDoc(achterstalligOnderhoud, {
-         locatie: this.locatie,
-         Schilderwerk: this.schilderwerk,
-         Houtrot: this.houtrot,
-         Elektra: this.elektraOnderhoud,
-         Leidingwerk: this.leidingwerk,
-         Beglazing: this.beglazing,
-         actieVereist: this.actie,
-         Kosten: this.kostenindicatie,
-         
-       })
-       .then(() => {
+    
+    
+    async addOnderhoud(){ // Voeg schade toe aan de database table SchadeOpnemen.
+        try {
+          addDoc(achterstalligOnderhoud, {
+            locatie: this.locatie,
+            Schilderwerk: this.schilderwerk,
+            Houtrot: this.houtrot,
+            Elektra: this.elektraOnderhoud,
+            Leidingwerk: this.leidingwerk,
+            Beglazing: this.beglazing,
+            actieVereist: this.actie,
+            Kosten: this.kostenindicatie,
+            
+          });
           alert('Nieuwe schade is toegevoegd.')
-       })
-       .catch(error => {
-         alert(error.message)
-         
-       })
-      
+        } catch (error){
+          alert(error.message)
+          this.error = error;
+        } 
     },
   }
 }

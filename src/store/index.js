@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 import schadeAPI from '@/store/modules/SchadeAPI.js'
 import OnderhoudAPI from "@/store/modules/OnderhoudAPI";
 import TechnischeAPI from "@/store/modules/TechnischeAPI"
+import ModificatieAPI from '@/store/modules/ModificatieAPI'
 
 export default createStore ({
 
@@ -27,6 +28,7 @@ export default createStore ({
         schadeAPI,
         OnderhoudAPI,
         TechnischeAPI,
+        ModificatieAPI,
     }
 });
 
