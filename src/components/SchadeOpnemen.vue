@@ -12,7 +12,9 @@
   
         </div>
         
-        <form v-on:submit="addSchade" v-if="toggleschade" class="sm:mb-3 sm:mt-4">
+        <form v-on:submit.prevent="addSchade" v-if="toggleschade" class="sm:mb-3 sm:mt-4">
+            <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2">{{ toegevoegd }}</span>
+            <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
             <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="schadeLocatie" placeholder="Locatie" required><br>
             <span class="font-semibold">Nieuwe Schade: </span><input class="w-[20px] h-[15px]" type="radio" v-model="schadeNieuw" value="true" @click="toggleNieuw()"><br>
             <div v-if="schadeNieuw" class="bg-white pl-6 mx-2 border-x-2 border-b-2 rounded-lg mb-5 border-black linear duration-500 shadow-lg shadow-black hover:shadow-xl">                    
@@ -55,6 +57,8 @@ export default {
         selected: false, //Als nieuwe schade aangeklikt word.
         toggleschade: false, // Formulier schade openen.
         actieSchade: false, 
+        toegevoegd: '',
+        error: '',
         // data voor Schade opnemen. 
         schadeLocatie: '', 
         schadeNieuw: false, 
@@ -121,9 +125,11 @@ export default {
           acuteActie: this.schadeActie,
           Omschrijving: this.schadeOmschrijving,
         });
-        alert('Nieuwe schade is toegevoegd.')
+        const toegevoegdMsg = 'Nieuwe schade is toegevoegd'
+        this.toegevoegd = toegevoegdMsg
       } catch (error){
         console.log(error)
+        this.error = error.message
       }
     },
   },

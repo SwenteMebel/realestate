@@ -8,9 +8,9 @@
                         <h1 class="text-center text-lg font-semibold">Technische installatie inspecteren</h1>
                       </div>
                     </div>
-                    <form v-on:submit="addTechnisch" v-if="toggletechnische" class="">
-                      <span v-if="toegevoegd >= 1"> {{ toegevoegd }}</span>
-                      <span v-if="error >= 1">{{ error }}</span>
+                    <form v-on:submit.prevent="addTechnisch" v-if="toggletechnische" class="">
+                      <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2"> {{ toegevoegd }}</span>
+                      <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
                       <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie" required><br>
                       <span class="font-semibold">Soort installatie:</span><br>
                       <input class="w-[20px] h-[15px]" type="radio" @click="toggleKoeling()" value="true" v-model="koeling"> <span>Koeling</span><br>
@@ -95,11 +95,12 @@ export default {
           opmerking: this.opmerkingTechnisch,
           goedgekeurd: this.goedgekeurd,
         });
-        alert('Technische schade is toegevoegd.');
+        
         const geslaagd = 'Technische schade is toegevoegd.'
         this.toegevoegd = geslaagd
       } catch (error) {
-        this.error = error
+        console.log(error.message)
+        this.error = error.message
       }
     }
  }

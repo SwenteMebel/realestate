@@ -8,9 +8,9 @@
                         <h1 class="text-center text-lg font-semibold">Modificaties inventariseren</h1>
                       </div>
                     </div>
-                    <form v-on:submit="addModificatie" v-if="togglemodificatie" class="">
-                      <span v-if="toegevoegd >= 1"> {{ toegevoegd }}</span>
-                      <span v-if="error >= 1">{{ error }}</span>
+                    <form v-on:submit.prevent="addModificatie" v-if="togglemodificatie" class="">
+                      <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2"> {{ toegevoegd }}</span>
+                      <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
                       
                       <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2 " type="text" v-model="locatie" placeholder="Locatie" required><br>
                       <span class="font-semibold">Uitgevoerd door: </span>
@@ -98,10 +98,11 @@ methods:{
           aanpassenKeuren: this.aanpassenKeuren,
           
       });
-        alert('Nieuwe schade is toegevoegd.')
-        this.toegevoegd = 'schade is toegevoegd.'
+        
+        this.toegevoegd = 'Modificatie opdracht is toegevoegd.'
       } catch (error){
-        this.error = error
+        this.error = error.message
+        console.log(error.message)
       }
     },
   }

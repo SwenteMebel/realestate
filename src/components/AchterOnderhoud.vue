@@ -8,8 +8,9 @@
                         <h1 class="text-center text-lg font-semibold">Achterstallig onderhoud opnemen</h1>
                       </div>
                     </div>
-                    <form v-on:submit="addOnderhoud" v-if="toggleonderhoud" >
-                        <span if="error >= 1">{{ error }}</span>
+                    <form v-on:submit.prevent="addOnderhoud" v-if="toggleonderhoud" >
+                        <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
+                        <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2">{{ toegevoegd }}</span>
                         <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie" required><br>
                         <span class="font-semibold">Soort Onderhoud:</span><br>
                         <input class="w-[20px] h-[15px]" type="radio" value="true" @click="toggleschilderwerk()" v-model="schilderwerk"> <span>Schilderwerk</span><br>
@@ -52,6 +53,8 @@ export default {
       toggleonderhoud: false, // Formulier onderhoud openen.
       actieonderhoud: false, // Actie vereist bij onderhoud opnemen
       error: '',
+      toegevoegd: '',
+
       locatie: '',
       schilderwerk: false,
       houtrot: false,
@@ -99,10 +102,11 @@ export default {
             actieVereist: this.actie,
             Kosten: this.kostenindicatie,
             
-          });
-          alert('Nieuwe schade is toegevoegd.')
+          })
+          const toegevoegdMsg = 'Nieuwe Onderhoud is toegevoegd.'
+          this.toegevoegd = toegevoegdMsg
         } catch (error){
-          alert(error.message)
+          console.log(error.message)
           this.error = error;
         } 
     },

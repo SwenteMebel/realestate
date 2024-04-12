@@ -7,12 +7,12 @@
     </div>
 
     
-    <span  class="absolute md:hidden right-20 top-3 text-xl cursor-pointer w-2">
+    <span  class="absolute lg:hidden right-20 top-3 text-xl cursor-pointer w-2">
       <li @click="openMenu()" :class="[open ? 'bi bi-x' : 'bi bi-filet-left']" class="list-none text-2xl font-bold"><i class="fa-solid fa-align-left" style="color: rgba(0, 170, 162, 1);"></i></li> 
     </span>
 
    
-    <ul class="md:flex md:items-center md:static bg-gradient-to-r from-green-lime via-light-dark to-dark-house text-black md:text-white md:bg-none absolute md:w-auto text-semibold w-full h-auto top-14 duration-300 ease-in" :class="[open ? 'left-0' : 'left-[-100%]']">
+    <ul class="lg:flex lg:items-center lg:static bg-gradient-to-r from-green-lime via-light-dark to-dark-house text-black md:text-white lg:bg-none absolute lg:w-auto text-semibold w-full h-auto md:top-20 lg:top-20  duration-300 ease-in" :class="[open ? 'left-0' : 'left-[-100%]']">
       <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/"><i class="fa-solid fa-house fa-sm" style="color: #27ce78;"></i> Home</router-link></li>
       <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/profile"><i class="fa-solid fa-user fa-sm" style="color: #27ce78;"></i> Profile</router-link></li>
       <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/overzicht"><i class="fa-solid fa-clipboard-list fa-sm" style="color: #27ce78;"></i> Overzicht</router-link></li>
@@ -33,7 +33,7 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/store/FirebaseConfig';
 import { getAuth, signOut } from 'firebase/auth';
 import router from '@/routing';
-import { watch } from 'vue';
+
 
 
 initializeApp(firebaseConfig)
@@ -52,7 +52,7 @@ const auth = getAuth();
       data(){
           return{
               open: false,
-              user: null,
+              user: '',
           }
       },
       
@@ -60,7 +60,9 @@ const auth = getAuth();
         const user = localStorage.getItem('user')
         if(user){
           this.user = JSON.parse(user)
-        }  watch(this.user)
+        } else {
+          this.user = ''
+        }
     },
 
     methods:{
@@ -72,9 +74,13 @@ const auth = getAuth();
         
         signOut(auth)
         localStorage.removeItem('user')
-        this.user = null
+        this.user = ''
         router.push('/login')
       },
+
+      checkuser(){
+        
+      }
     },      
 
   }

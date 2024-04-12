@@ -22,11 +22,13 @@
     <section class="mb-20  bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
         <div class="flex justify-center">
             <div v-if="edittoggle" class="py-6  text-black grid md:ml-10">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:     </p><input    class="p-1 rounded-md active:border-white"   type="text" v-model="inputGbnaam" placeholder="[Gebruikersnaam]">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum:  </p><input class="p-1 rounded-md active:border-white"   type="date" v-model="inputGbDatum" placeholder="[Geboorte Datum]">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:     </p><input  class="p-1 rounded-md active:border-white"   type="text" v-model="inputWoonplaats" placeholder="[Woonplaats]">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:   </p><input  class="p-1 rounded-md active:border-white"   type="text" v-model="inputAdres" placeholder="[Adres]">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   </p><input   class="p-1 rounded-md active:border-white"   type="text" v-model="inputFunctie" placeholder="[Functie]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:     </p><input    class="p-1 rounded-md active:border-white" type="text" v-model="inputGbnaam" placeholder="[Gebruikersnaam]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Tussenvoegsel:     </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputtussenvoegsel" placeholder="[Tussnevoegsel]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Achternaam:     </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputAchternaam" placeholder="[Achternaam]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum:  </p><input class="p-1 rounded-md active:border-white" type="date" v-model="inputGbDatum" placeholder="[Geboorte Datum]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:     </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputWoonplaats" placeholder="[Woonplaats]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:   </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputAdres" placeholder="[Adres]">
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   </p><input   class="p-1 rounded-md active:border-white" type="text" v-model="inputFunctie" placeholder="[Functie]">
                     <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-image fa-sm" style="color: #e9eaec;"></i> Upload profiel foto:  </p><input   type="file">
                     <input class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime" type="submit" value="Bewerk">
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <section class=" md:grid md:justify-center bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
+    <section class="bg-red-200 p-2 md:grid md:justify-center bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
         <schadeDataVue />
         <onderhoudDataVue />
         <technischeDataVue />
