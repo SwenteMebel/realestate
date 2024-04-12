@@ -1,7 +1,7 @@
 <template>
  
         
-    <div if="loadingStatus === loading">
+    <div v-if="loadingStatus !== loading">
         <div v-if="schade && schades.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
             <h1 class="grid justify-center text-xl font-semibold text-white">Schade Opnemen</h1>
             <div v-for="schadedata, index in schades" :key="schadedata.id" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
@@ -73,15 +73,15 @@ export default {
         },
 
         schades() {
-            return this.$store.state.schadeAPI.schade;
+            return this.$store.state.schadeAPI.schade; // Haalt data uit de vuex array schade en je kunt het hier gebruiken
         },
 
         loadingStatus() {
-            return this.$store.state.schadeAPI.loadingStatus;
+            return this.$store.state.schadeAPI.loadingStatus; // Kijkt of er loading nodig is.
         },
 
         error() {
-            return this.$store.state.schadeAPI.error;
+            return this.$store.state.schadeAPI.error; // kijkt of er een error is. 
         }
 
 

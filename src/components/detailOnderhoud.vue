@@ -10,8 +10,9 @@
             <li class="ml-5" v-if="onderhoudData.Schilderwerk">Schilderwerk</li>
             <li class="ml-5" v-if="onderhoudData.actieVereist">{{ onderhoudData.actieVereist ? 'Actie vereist' : 'Geen actie vereist' }}</li>
             <li class="ml-5" v-if="onderhoudData.Kosten"> € {{ onderhoudData.Kosten }}</li>
-        
+           
         </ul>
+        <input @click="removeItem(onderhoudData.id)" value="Delete" type="submit" class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear">
     </div>
 </template>
 
@@ -30,7 +31,12 @@ export default {
     ],
 
 
-    
+    methods:{
+        removeItem(itemId){
+            const item = itemId
+            this.$store.dispatch('OnderhoudAPI/deleteItem', item)
+        }
+    }
 
 
 }

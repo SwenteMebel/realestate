@@ -1,4 +1,4 @@
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, doc, deleteDoc  } from 'firebase/firestore';
 
 const db = getFirestore();
 const achterStallig = collection(db, 'AchterstalligOnderhoud');
@@ -23,7 +23,9 @@ export default({
         CLEAR_DATA(state){
             state.onderhoud = [];
         },
-
+        REMOVE_DATA(state, itemId){
+            state.onderhoud = state.onderhoud.filter(item => item.id !== itemId)
+        },
         SET_ERROR(state, payload){
             state.error.push(payload);
         }
@@ -48,6 +50,17 @@ export default({
             });
             return data;
         },
+
+        async deleteItem(context, itemId){
+            try{
+                const docDelete = doc(achterStallig, itemId)
+                await deleteDoc(docDelete)
+                context.commit('REMOVE_DATA', itemId)
+                console.log('Onderhoud melding is verwijderd')
+            } catch (error){
+                console.log(error)
+            }
+        }
     },
 
     modules: {

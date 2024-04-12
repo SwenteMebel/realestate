@@ -11,7 +11,7 @@
                     <form v-on:submit="addModificatie" v-if="togglemodificatie" class="">
                       <span v-if="toegevoegd >= 1"> {{ toegevoegd }}</span>
                       <span v-if="error >= 1">{{ error }}</span>
-                      <span class="font-semibold">Bestaande Modificaties:</span> <span>[Link bestaande inventarisatie]</span><br>
+                      
                       <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2 " type="text" v-model="locatie" placeholder="Locatie" required><br>
                       <span class="font-semibold">Uitgevoerd door: </span>
                       <select v-model="uitgevoerd" class="border-2 border-black rounded-lg mt-1" required>
@@ -62,7 +62,7 @@ return{
   keuren: false,
   verwijderen:  false,
   aanpassenKeuren:  false,
- 
+  bestaandeModi: '',
 }
 },
 
@@ -75,7 +75,7 @@ methods:{
       this.accepteren = !this.accepteren;
     },
     toggleKeuren(){
-      this.kleuren = !this.keuren;
+      this.keuren = !this.keuren;
     },
     toggleVerwijderen(){
       this.verwijderen = !this.verwijderen;

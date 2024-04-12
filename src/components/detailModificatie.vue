@@ -10,7 +10,7 @@
             <li class="ml-5" v-if="modificatieDetail.verwijderen"><span>Aanpassing verwijderen</span></li>
             <p class="ml-5 font-semibold" v-if="modificatieDetail.beschrijving ">Beschrijving:<br><span class="font-normal">{{ modificatieDetail.beschrijving }}</span></p>
         </ul>
-
+        <input @click="removeItem(modificatieDetail.id)" value="Delete" type="submit" class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear">
         
     </div>
 </template>
@@ -28,7 +28,12 @@ export default {
         'modificatieDetail',  
     ],
 
-
+methods:{
+    removeItem(itemId){
+        const item = itemId
+        this.$store.dispatch('ModificatieAPI/deleteItem', item)
+    }
+}
     
 
 

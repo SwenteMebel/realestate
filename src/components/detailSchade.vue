@@ -33,11 +33,9 @@ export default {
     ],
    
    methods: {
-    removeItem(item){
-        const itemId = item
-        console.log(item)
-        alert('klik ' + typeof(itemId))
-        this.$store.dispatch('schadeAPI/deleteItem', 'itemId')
+    removeItem(item){ // als er op de knop word gedrukt dan roept hij een actions aan in de Vuex.
+        const itemId = item // itemid dat word mee gegeven.
+        this.$store.dispatch('schadeAPI/deleteItem', itemId)
     },
    }
 }

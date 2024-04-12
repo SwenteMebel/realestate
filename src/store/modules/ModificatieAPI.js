@@ -1,4 +1,4 @@
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 
 const db = getFirestore();
 const modificatieInventaris = collection(db, 'ModificatieInventaris') // de data ModificatieInverntaris ophalen en variable geven
@@ -23,6 +23,9 @@ export default({
         },
         CLEAR_DATA(state){
             state.modificatie = [];
+        },
+        REMOVE_DATA(state, itemId){
+            state.modificatie = state.modificatie.filter(item => item.id !== itemId)
         },
 
         SET_ERROR(state, payload){
@@ -49,6 +52,18 @@ export default({
             });
             return data;
         },
+
+
+        async deleteItem(context, itemId){
+            try{
+                const docDelete = doc(modificatieInventaris, itemId)
+                await deleteDoc(docDelete)
+                context.commit('REMOVE_DATA', itemId)
+                alert('Modificatie melding is verwijderd')
+            } catch(error){
+                console.log(error)
+            }
+        }
     },
 
     modules: {

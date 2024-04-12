@@ -54,24 +54,21 @@ export default({
             return data;
         },
 
-
-        async deleteItem(itemId){
+        async deleteItem(context, itemId){ // Zodra er op delete knop word gedrukt word deze functie afgespeeld
             try{
-                console.log('delete knop in API call ' + itemId)
-                const docDelete = doc(db, schadeOpnemen, itemId);
-                await deleteDoc(docDelete)
-                alert('delete geslaagd')
+                const docDelete = doc(schadeOpnemen, itemId); // neemt de db connectie en variable
+                await deleteDoc(docDelete) // verwijderd de data uit firestore
+                context.commit('REMOVE_DATA', itemId) // verwijderd de data uit Vuex
+                alert('Schade melding is verwijderd.')
             } catch (error){
                 console.log(error)
-            }
-            
-               
-            
+            } 
         }
+
     },
 
     modules: {
-        
+     
     },
 
     getters: {

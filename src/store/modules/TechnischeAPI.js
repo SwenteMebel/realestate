@@ -1,4 +1,4 @@
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 
 const db = getFirestore(); // verbinding met de firebase 
 const technischeeInstallatie = collection(db, 'TechnischeInstallatie') // de data technischeeInstallatie ophalen en variable geven
@@ -23,6 +23,9 @@ export default({
         },
         CLEAR_DATA(state){
             state.technische = [];
+        },
+        DELETE_DATA(state, itemId){
+            state.technische = state.technische.filter(item => item.id !== itemId)
         },
 
         SET_ERROR(state, payload){
@@ -49,6 +52,18 @@ export default({
             });
             return data;
         },
+
+
+        async deleteItem(context, itemId){ // Zodra er op delete knop word gedrukt word deze functie afgespeeld
+            try{
+                const docDelete = doc(technischeeInstallatie, itemId); // neemt de db connectie en variable
+                await deleteDoc(docDelete) // verwijderd de data uit firestore
+                context.commit('REMOVE_DATA', itemId) // verwijderd de data uit Vuex
+                alert('Schade melding is verwijderd.')
+            } catch (error){
+                console.log(error)
+            } 
+        }
     },
 
     modules: {

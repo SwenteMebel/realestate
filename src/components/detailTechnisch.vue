@@ -13,8 +13,7 @@
             <p class="font-semibold" v-if="technischDetail.opmerking != '' ">Opmerking:<br>
             <span class="font-normal">{{ technischDetail.opmerking }}</span></p>
         </ul>
-       
-
+        <input @click="removeItem(technischDetail.id)" value="Delete" type="submit" class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear">
     </div>
 </template>
 
@@ -32,6 +31,13 @@ export default {
     'technischDetail' 
     ],
    
-   
+   methods:{
+        removeItem(itemId){
+            const item = itemId
+            this.$store.dispatch('TechnischeAPI/deleteItem', item)
+        },  
+   }
+
+
 }
 </script>
