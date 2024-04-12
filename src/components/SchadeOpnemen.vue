@@ -8,6 +8,8 @@
             <div class="flex justify-center">
                 <h1 class="text-center text-lg font-semibold">Schade opnemen</h1>
             </div>
+
+  
         </div>
         
         <form v-on:submit="addSchade" v-if="toggleschade" class="sm:mb-3 sm:mt-4">

@@ -9,6 +9,8 @@
                       </div>
                     </div>
                     <form v-on:submit="addTechnisch" v-if="toggletechnische" class="">
+                      <span v-if="toegevoegd >= 1"> {{ toegevoegd }}</span>
+                      <span v-if="error >= 1">{{ error }}</span>
                       <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie" required><br>
                       <span class="font-semibold">Soort installatie:</span><br>
                       <input class="w-[20px] h-[15px]" type="radio" @click="toggleKoeling()" value="true" v-model="koeling"> <span>Koeling</span><br>
@@ -43,7 +45,8 @@ export default {
  data(){
    return{
         toggletechnische: false, // Formulier technisch openen.
-        
+        toegevoegd: '',
+        error: '',
        // data voor Schade opnemen. 
         locatie: '',
         koeling: false,
@@ -92,9 +95,11 @@ export default {
           opmerking: this.opmerkingTechnisch,
           goedgekeurd: this.goedgekeurd,
         });
-        alert('Nieuwe schade is toegevoegd.');
+        alert('Technische schade is toegevoegd.');
+        const geslaagd = 'Technische schade is toegevoegd.'
+        this.toegevoegd = geslaagd
       } catch (error) {
-        console.log(error.message);
+        this.error = error
       }
     }
  }

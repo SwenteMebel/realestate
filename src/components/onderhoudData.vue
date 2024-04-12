@@ -3,7 +3,15 @@
         
     <div if="loadingStatus === loading">
         <div v-if="Onderhoud && Onderhoud.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
-            <h1 class="grid justify-center text-xl font-semibold text-white">Achterstallig Onderhoud</h1>
+            <div class="grid grid-cols-7">
+                <div class="col-span-5 ml-[6rem] md:col-span-6">
+                    <h1 class="grid justify-center text-xl font-semibold text-white">Achterstallig Onderhoud</h1>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <span  class="grid justify-center text-xl font-semibold text-white"> Aantal: {{ Onderhoud.length }}</span>
+                </div>
+            </div>
+          
             <div v-for="onderhoud, index in Onderhoud" :key="onderhoud.id" @click="selectTask(index)" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
                 <p class="font-semibold">Soort opdracht: <span class="font-normal">Achterstallig Onderhoud</span></p>
                 <p class="font-semibold">Schade Nummer: <span class="font-normal">{{ onderhoud.id }}</span></p>

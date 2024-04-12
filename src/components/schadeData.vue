@@ -3,7 +3,14 @@
         
     <div v-if="loadingStatus !== loading">
         <div v-if="schade && schades.length >= 1" class="bg-light-dark md:w-[50rem] md:my-[8rem] p-[1rem] rounded-md m-2">
-            <h1 class="grid justify-center text-xl font-semibold text-white">Schade Opnemen</h1>
+         <div class="grid grid-cols-7">
+            <div class="col-span-5 ml-[6rem] md:col-span-6">
+                <h1 class="grid justify-center text-xl font-semibold text-white">Schade Opnemen</h1>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+                <span  class="grid justify-center text-xl font-semibold text-white"> Aantal: {{ schades.length }}</span>
+            </div>
+         </div>
             <div v-for="schadedata, index in schades" :key="schadedata.id" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
                 <div @click="selectTask(index)" >
                     <p class="font-semibold">Soort opdracht: <span class="font-normal">Schade Opnemen</span></p>
