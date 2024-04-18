@@ -1,17 +1,25 @@
 <template>
-    <section class=" mt-10 bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
+    
+    <section v-if="loadingStatus === 'notloading'" class=" mt-10 bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
         <div class="flex justify-center">
             <div class="grid md:flex md:py-6 py-4">
+         
                 <div class="bg-orange-300 w-[18rem] h-[18rem] md:w-[20rem] md:h-[18rem] md:mr-3 flex justify-center items-center">
                     <img src="" alt="Profiel_foto">
                 </div>
                 <div class="text-black mt-8 md:mt-[3rem] ">
-                    <h1 class="font-serif text-lg md:text-xl text-orange-400 mb-5"> <i class="fa-solid fa-user-tie fa-lg" style="color: #fafafa;"></i> Profiel van <span> {{ user }}</span></h1>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:      <span class="text-orange-300">[Gebruikersnaam]</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum: <span class="text-orange-300">[datum]</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:    <span class="text-orange-300">[Plaats naam]</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  <span class="text-orange-300">[Woon Adres]</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   <span class="text-orange-300">[Functie]</span></p>
+                    <h1 class="font-serif text-lg md:text-xl text-orange-400 mb-5"> <i class="fa-solid fa-user-tie fa-lg" style="color: #fafafa;"></i> Profiel van 
+                        <span>
+                            <select>
+                                <option v-for="user, index in userProfiel" :key="user.id" @click="selectUser(index)"> {{ user.naam }}</option>
+                            </select>
+                        </span>
+                    </h1>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:      <span class="text-orange-300">{{ profiel.naam }} {{ profiel.tussenvoegsel }} {{ profiel.achternaam }}</span></p>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum: <span class="text-orange-300">{{ profiel.geboortedatum }}</span></p>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:    <span class="text-orange-300">{{ profiel.woonplaats }}</span></p>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  <span class="text-orange-300">{{ profiel.adres }}</span></p>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   <span class="text-orange-300">{{ profiel.functie }}</span></p>
                     <button @click="editToggle()" class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime">Edit</button>
                 </div>
             </div>
@@ -45,14 +53,49 @@ export default{
     data(){
         return{
             edittoggle: false,
+            profiel: [],
+            selectedUser: 0,
         }
     },
 
-    methods: {
+    methods: { 
         editToggle(){
             this.edittoggle = !this.edittoggle;
+        },
+
+        selectUser(index){
+            this.selectedUser = index
+        },
+    },
+
+    beforeCreate(){
+        console.log('before create word aangeroepen')
+        this.$store.dispatch('ProfielAPI/ophalenProfiel')
+    },
+
+    computed:{
+        selectUserData(){
+            
+            return { // selecteerd en kopieert de opdrachten array uit het object en zet het in de selectedTaskIndex
+                ...this.profiel[this.selectedUser]
+                
+            }
+        },
+
+        userProfiel(){
+            console.log(this.$store.state.ProfielAPI.profiel)
+            return this.$store.state.ProfielAPI.profiel;
+        },
+
+        loadingStatus() {
+            return this.$store.state.ProfielAPI.loadingStatus;
+        },
+
+        error() {
+            return this.$store.state.ProfielAPI.error;
         }
-    }
+
+    },
 
 
 }

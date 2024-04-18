@@ -61,7 +61,6 @@ export default {
     },
 
     beforeCreate() {
-        console.log('beforecreate word geladenin technisch ')
         this.$store.dispatch('ModificatieAPI/ophalenModificatie') // roept naar de functie OnderhoudAPI in de Axios API 
     },
 
@@ -74,7 +73,6 @@ export default {
         },
 
         ophalenModificaties() {
-            console.log('Modificatie data  ' , this.$store.state.ModificatieAPI.modificatie)
             return this.$store.state.ModificatieAPI.modificatie;
         },
 
