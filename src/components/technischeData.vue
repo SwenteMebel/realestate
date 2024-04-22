@@ -69,8 +69,10 @@ export default {
     computed: {
     
         selectTaskData(){
+            
             return { // selecteerd en kopieert de opdrachten array uit het object en zet het in de selectedTaskIndex
                 ...this.technisch[this.selectedTaskIndex]
+
             }
         },
 

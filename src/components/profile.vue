@@ -10,17 +10,24 @@
                 <div class="text-black mt-8 md:mt-[3rem] ">
                     <h1 class="font-serif text-lg md:text-xl text-orange-400 mb-5"> <i class="fa-solid fa-user-tie fa-lg" style="color: #fafafa;"></i> Profiel van 
                         <span>
-                            <select>
-                                <option v-for="user, index in userProfiel" :key="user.id" @click="selectUser(index)"> {{ user.naam }}</option>
+                            <select v-model="userID">
+                                <option v-for="(user) in userProfiel" :key="user.id" :value='user.id'> {{ user.naam }}</option>
                             </select>
                         </span>
+                        <button @click="selectUser()">Bekijk</button>
                     </h1>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:      <span class="text-orange-300">{{ profiel.naam }} {{ profiel.tussenvoegsel }} {{ profiel.achternaam }}</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum: <span class="text-orange-300">{{ profiel.geboortedatum }}</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:    <span class="text-orange-300">{{ profiel.woonplaats }}</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  <span class="text-orange-300">{{ profiel.adres }}</span></p>
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   <span class="text-orange-300">{{ profiel.functie }}</span></p>
-                    <button @click="editToggle()" class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime">Edit</button>
+                    <div v-if="getProfiel && getProfiel.length >= 1">
+                        <div v-for="userProfiel in getProfiel" :key="userProfiel.id">
+                            <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:      <span class="text-orange-300">{{ userProfiel.naam }} {{ userProfiel.tussenvoegsel }} {{ userProfiel.achternaam }}</span></p>
+                            <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum: <span class="text-orange-300">{{ userProfiel.geboortedatum }}</span></p>
+                            <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:    <span class="text-orange-300">{{ userProfiel.woonplaats }}</span></p>
+                            <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  <span class="text-orange-300">{{ userProfiel.adres }}</span></p>
+                            <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   <span class="text-orange-300">{{ userProfiel.functie }}</span></p>
+                            <button @click="editToggle()" class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime">Edit</button>
+                        </div>      
+                    </div>
+                    
+
                 </div>
             </div>
         </div>
@@ -54,7 +61,6 @@ export default{
         return{
             edittoggle: false,
             profiel: [],
-            selectedUser: 0,
         }
     },
 
@@ -63,13 +69,13 @@ export default{
             this.edittoggle = !this.edittoggle;
         },
 
-        selectUser(index){
-            this.selectedUser = index
+        selectUser(){
+            this.$store.dispatch('ProfielAPI/GetUser', this.userID)
+           
         },
     },
 
     beforeCreate(){
-        console.log('before create word aangeroepen')
         this.$store.dispatch('ProfielAPI/ophalenProfiel')
     },
 
@@ -82,7 +88,12 @@ export default{
             }
         },
 
-        userProfiel(){
+        getProfiel() {
+            console.log(this.$store.state.ProfielAPI.getProfiel)
+            return this.$store.state.ProfielAPI.getProfiel;
+        },
+
+        userProfiel(){ // haalt alle users op die er zijn
             console.log(this.$store.state.ProfielAPI.profiel)
             return this.$store.state.ProfielAPI.profiel;
         },

@@ -9,7 +9,8 @@ export default({
     state: {
        profiel: [],
        loadingStatus: 'notloading',
-       error: [],   
+       error: [], 
+       getProfiel: [],  
     },
 
     mutations: {
@@ -26,6 +27,11 @@ export default({
         REMOVE_DATA(state, itemId){
             state.profiel = state.profiel.filter(item => item.id !== itemId)
         },
+        GET_SINGLE_USER(state, userId){
+            console.log(' user id word gezoht ',userId)
+            const user =  state.profiel.find(user => user.id === userId)
+            state.getProfiel = user ? user : 'geen user gevonden';
+        },
         SET_ERROR(state, payload){
             state.error.push(payload);
         }
@@ -33,7 +39,7 @@ export default({
 
     actions:{
         ophalenProfiel(context){
-            console.log('functie ophalenProfiel word opgeroepen')
+            
             context.commit('LOADING_STATUS', 'loading');
             
             const data = onSnapshot(profileUsers, (snapshot) => {
@@ -62,7 +68,16 @@ export default({
             } catch (error){
                 console.log(error)
             }
-        }
+        },
+
+        GetUser(context, userId){
+            try{
+                context.commit('GET_SINGLE_USER', userId)
+                console.log('GetUser functie in Try ', context.state.getProfiel)
+            } catch (error) {
+                console.log(error)
+            }
+        },
     },
 
     modules: {
