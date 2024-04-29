@@ -1,4 +1,4 @@
-import { getFirestore, collection, onSnapshot, doc, deleteDoc  } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, doc, deleteDoc, updateDoc  } from 'firebase/firestore';
 
 const db = getFirestore();
 const profileUsers = collection(db, 'profielUsers');
@@ -28,7 +28,7 @@ export default({
             state.profiel = state.profiel.filter(item => item.id !== itemId)
         },
         GET_SINGLE_USER(state, userId){
-            console.log(' user id word gezoht ',userId)
+            console.log(' user id word gezocht ', userId)
             const user =  state.profiel.find(user => user.id === userId)
             state.getProfiel = user ? user : 'geen user gevonden';
         },
@@ -78,6 +78,36 @@ export default({
                 console.log(error)
             }
         },
+
+        async editProfiel(context, profileId){ 
+            console.log('EditProfiel word aangeroepen buiten try met id ' , profileId.id, profileId.naam, profileId.tussenVoegsel, profileId.gbDatum, profileId.achternaam, profileId.adres, profileId.functie, profileId.woonplaats)
+            const id = profileId.id;
+            const naam = profileId.naam;
+            const tussen = profileId.tussenVoegsel;
+            const achter = profileId.achternaam;
+            const gbdatum = profileId.gbDatum;
+            const functie = profileId.functie;
+            const adres = profileId.adres;
+            const woonplaats = profileId.woonplaats;
+
+            try {
+                console.log('EditProfiel word aangeroepen in try met id ' , id, naam, tussen, achter, gbdatum, functie, adres, woonplaats)
+                const docUpdate = doc(profileUsers, id)
+                await updateDoc(docUpdate, {
+                        naam: naam,
+                        achternaam: achter,
+                        adres: adres,
+                        functie: functie,
+                        gboortedatum: gbdatum,
+                        tussenvoegsel: tussen,
+                        woonplaats: woonplaats,
+                })
+                console.log('Profiel geupdate')
+            } catch (error) {
+                console.log(error.message)
+            }
+            
+        }
     },
 
     modules: {
@@ -85,6 +115,8 @@ export default({
     },
 
     getters: {
-    
+        getProfiel(state) {
+            return state.getProfiel;
+        }
     }
 })
