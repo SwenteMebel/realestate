@@ -1,29 +1,31 @@
 <template>
          <div class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
-                    <div class="flex">
-                      <div class="flex mr-4">
-                        <input class="w-4" type="radio" @click="toggleTechnische()" value="true" v-model="toggletechnische">
-                      </div>
-                      <div class="flex justify-center">
-                        <h1 class="text-center text-lg font-semibold">Technische installatie inspecteren</h1>
-                      </div>
-                    </div>
-                    <form v-on:submit.prevent="addTechnisch" v-if="toggletechnische" class="">
-                      <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2"> {{ toegevoegd }}</span>
-                      <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
-                      <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie" required><br>
-                      <span class="font-semibold">Soort installatie:</span><br>
-                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleKoeling()" value="true" v-model="koeling"> <span>Koeling</span><br>
-                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleVerwarming()" value="true" v-model="verwarming"> <span>Verwarming</span><br>
-                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleLuchtverversing()" value="true" v-model="luchtverversing"> <span>Luchtverversing</span><br>
-                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleElektra()" value="true" v-model="elektra"> <span>Elektra</span><br>
-                      <input class="w-[20px] h-[15px]" type="radio" @click="toggleBeveiliging()" value="true" v-model="beveiliging"> <span>Beveiliging</span><br>
-                      <span class="font-semibold">Goed gekeurd: </span> <input type="radio" v-model="goedgekeurd" value="true" @click="goedGekeurd()"><br>
-                      <span class="font-semibold">Opmerking: </span><br>
-                      <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" v-model="opmerkingTechnisch" placeholder="Opmerking..." required></textarea><br>
-                      <input class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear" type="submit" value="Versturen">
-                    </form> 
-                  </div>
+              <div class="flex">
+                <div class="flex mr-4">
+                  <input class="w-4" type="radio" @click="toggleTechnische()" value="true" v-model="toggletechnische">
+                </div>
+                <div class="flex justify-center">
+                  <h1 class="text-center text-lg font-semibold">Technische installatie inspecteren</h1>
+                </div>
+              </div>
+              <transition name="slide-fade">
+                <form v-on:submit.prevent="addTechnisch" v-if="toggletechnische" class="">
+                  <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2"> {{ toegevoegd }}</span>
+                  <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
+                  <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie" required><br>
+                  <span class="font-semibold">Soort installatie:</span><br>
+                  <input class="w-[20px] h-[15px]" type="radio" @click="toggleKoeling()" value="true" v-model="koeling"> <span>Koeling</span><br>
+                  <input class="w-[20px] h-[15px]" type="radio" @click="toggleVerwarming()" value="true" v-model="verwarming"> <span>Verwarming</span><br>
+                  <input class="w-[20px] h-[15px]" type="radio" @click="toggleLuchtverversing()" value="true" v-model="luchtverversing"> <span>Luchtverversing</span><br>
+                  <input class="w-[20px] h-[15px]" type="radio" @click="toggleElektra()" value="true" v-model="elektra"> <span>Elektra</span><br>
+                  <input class="w-[20px] h-[15px]" type="radio" @click="toggleBeveiliging()" value="true" v-model="beveiliging"> <span>Beveiliging</span><br>
+                  <span class="font-semibold">Goed gekeurd: </span> <input type="radio" v-model="goedgekeurd" value="true" @click="goedGekeurd()"><br>
+                  <span class="font-semibold">Opmerking: </span><br>
+                  <textarea class="w-[20rem] h-[10rem] rounded-lg p-2 border-black border-2" v-model="opmerkingTechnisch" placeholder="Opmerking..." required></textarea><br>
+                  <input class="bg-gradient-to-r from-green-lime to-light-dark py-2 rounded-lg px-3 m-2 shadow-black font-semibold shadow-lg active:shadow-md active:shadow-orange-500 duration-100 linear" type="submit" value="Versturen">
+                </form> 
+              </transition>
+            </div>
 </template>
 
 
@@ -106,3 +108,20 @@ export default {
  }
 }
 </script>
+<style scoped>
+
+.slide-fade-enter-active {
+  transition: all 1s linear;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+</style>

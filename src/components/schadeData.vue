@@ -11,6 +11,7 @@
                 <span  class="grid justify-center text-xl font-semibold text-white"> Aantal: {{ schades.length }}</span>
             </div>
          </div>
+         
             <div v-for="schadedata, index in schades" :key="schadedata.id" class=" bg-white opacity-70 hover:opacity-100 p-4 mb-4 m-2 rounded-md ease-linear duration-300 hover:shadow-lg hover:shadow-green-lime">
                 <div @click="selectTask(index)" >
                     <p class="font-semibold">Soort opdracht: <span class="font-normal">Schade Opnemen</span></p>
@@ -19,10 +20,8 @@
                     <p class="font-semibold" >Datum: <span class="font-normal">{{ schadedata.Datum }}</span></p>
                     <detailSchade  v-if="toggle && selectedTaskIndex === index" :schadedata="schadedata" />
                 </div>
-                
             </div>
-          
-            
+        
         </div>
     </div>
        
@@ -93,9 +92,5 @@ export default {
 
 
     },
-
-
-
-
 }
 </script>

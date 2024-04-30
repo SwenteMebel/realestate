@@ -1,5 +1,6 @@
 <template>
     <div class="md:flex md:justify-center gap-[3rem] lg:gap-[5rem]">
+       
         <section class="flex justify-center">
             <div class=" w-[23rem] lg:w-[30rem] md:h-[43rem] h-[45rem] mt-[5rem] md:mt-[10rem] grid justify-center rounded-xl shadow-lg shadow-black mb-5 bg-gradient-to-r from-green-lime via-light-dark to-dark-house focus:shadow-gray-700 linear duration-200">
                 <div class=" grid justify-center items-center mt-4">
@@ -87,6 +88,7 @@ export default {
             email: '',
             password: '',
             herpassword: '',
+            user : null,
 
             // voor registreer Profiel user
             naam: '',
@@ -139,7 +141,17 @@ methods: {
             this.ProfielError = errormsg
             console.log(error)
         }
-    }
+    },
+
+    checkuser(){
+          if(localStorage.getItem('user')){
+            const user = localStorage.getItem('user')
+            this.user = user
+        } else {
+            this.user = null
+          console.log('geen user gevonden.')
+        }
+      },
 },
 
 
