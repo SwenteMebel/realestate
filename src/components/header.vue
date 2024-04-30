@@ -1,11 +1,6 @@
 <template>
   <div class="text-text-house bg-gradient-to-r from-green-lime via-light-dark to-dark-house text-gray-100 md:py-3.5  md:px-6 h-14 md:h-20 md:flex justify-between items-center sticky top-0 shadow-xl hover:shadow-gray-700 linear duration-300 z-10">
  <img alt="Logo" id="logo" src="../assets/RealEstateLogo_met_text.png" class="md:w-[15rem] w-[10.5rem]">
-    <div class="flex items-center">
-      <h1 class="text-xl font-black self-center">{{ title }}</h1>
-      <p class="text-md font-light self-center px-2">{{ subtitle }}</p>
-    </div>
-
     
     <span  class="absolute lg:hidden right-20 top-3 text-xl cursor-pointer w-2">
       <li @click="openMenu()" :class="[open ? 'bi bi-x' : 'bi bi-filet-left']" class="list-none text-2xl font-bold"><i class="fa-solid fa-align-left" style="color: rgba(0, 170, 162, 1);"></i></li> 
@@ -31,7 +26,7 @@
 
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/store/FirebaseConfig';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import router from '@/routing';
 
 
@@ -52,26 +47,16 @@ const auth = getAuth();
       data(){
           return{
               open: false,
-              user: '',
+              user: null,
           }
       },
-      
-    created(){
-        const user = localStorage.getItem('user')
-        if(user){
-          this.user = JSON.parse(user)
-        } else {
-          this.user = ''
-        }
-    },
 
     methods:{
       openMenu(){
-          this.open = !this.open;
+        this.open = !this.open;
       },
 
       logout(){
-        
         signOut(auth)
         localStorage.removeItem('user')
         this.user = ''
@@ -79,9 +64,30 @@ const auth = getAuth();
       },
 
       checkuser(){
-        
-      }
-    },      
+          if(localStorage.getItem('user')){
+            const user = localStorage.getItem('user')
+            this.user = JSON.parse(user)
+        } else {
+            this.user = null
+          console.log('geen user gevonden.')
+        }
+      },
+    },  
+    
+    mounted() {
+      this.checkuser();
+
+      // Listen for authentication state changes
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in.
+          this.user = user;
+        } else {
+          // User is signed out.
+          this.user = null;
+        }
+      });
+    }
 
   }
 </script>

@@ -37,14 +37,14 @@
     <section v-if="loadingStatus === 'notloading'" class="mb-20  bg-gradient-to-r from-green-lime via-light-dark to-dark-house">
         <div class="flex justify-center">
             <div v-if="edittoggle && zoekProfiel" class="py-6  text-black grid md:ml-10">
-                {{ zoekProfiel.id }}
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:   {{ zoekProfiel.naam }}  </p><input    class="p-1 rounded-md active:border-white" type="text" v-model="inputNaam" placeholder="Naam">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Tussenvoegsel:  {{ zoekProfiel.tussenvoegsel }}   </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputTussenvoegsel" placeholder="Tussenvoegsel">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Achternaam:   {{ zoekProfiel.achternaam }}  </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputAchternaam" placeholder="Achternaam">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum:  {{ zoekProfiel.gboortedatum }} </p><input class="p-1 rounded-md active:border-white" type="date" v-model="inputGbDatum" placeholder="">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats: {{ zoekProfiel.woonplaats }}    </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputWoonplaats" placeholder="Woonplaats">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  {{ zoekProfiel.adres }} </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputAdres" placeholder="Adres">
-                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:  {{ zoekProfiel.functie }} </p><input   class="p-1 rounded-md active:border-white" type="text" v-model="inputFunctie" placeholder="Functie">
+                <p class="bg-yellow-500 p-1 rounded-lg font-serif font-bold">Hallo {{ zoekProfiel.naam }}, vul alles opnieuw in met de juiste gegevens.</p>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-signature fa-sm" style="color: #ffffff;"></i> Naam:   {{ zoekProfiel.naam }}  </p><input    class="p-1 rounded-md active:border-white" type="text" v-model="inputNaam" placeholder="Naam" required>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Tussenvoegsel:  {{ zoekProfiel.tussenvoegsel }}   </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputTussenvoegsel" placeholder="Tussenvoegsel" required>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Achternaam:   {{ zoekProfiel.achternaam }}  </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputAchternaam" placeholder="Achternaam" required>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-cake-candles" style="color: #d1d7e0;"></i> Geboortedatum:  {{ zoekProfiel.gboortedatum }} </p><input class="p-1 rounded-md active:border-white" type="date" v-model="inputGbDatum" placeholder="" required>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats: {{ zoekProfiel.woonplaats }}    </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputWoonplaats" placeholder="Woonplaats" required>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  {{ zoekProfiel.adres }} </p><input  class="p-1 rounded-md active:border-white" type="text" v-model="inputAdres" placeholder="Adres" required>
+                    <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:  {{ zoekProfiel.functie }} </p><input   class="p-1 rounded-md active:border-white" type="text" v-model="inputFunctie" placeholder="Functie" required>
                     <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-image fa-sm" style="color: #e9eaec;"></i> Upload profiel foto:  </p><input   type="file">
                     <input @click="editProfile(zoekProfiel.id)" class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime" type="submit" value="Bewerk">
             </div>
@@ -69,7 +69,8 @@ export default{
             inputAdres: '',
             inputFunctie: '',
             inputWoonplaats: '',
-
+            aangepast: '',
+            
         }
     },
 
@@ -84,8 +85,6 @@ export default{
         },
 
         editProfile(profielId){
-            console.log('EditProfiel functie word aangeroepen', profielId, this.inputNaam)
-            
             this.$store.dispatch('ProfielAPI/editProfiel',  { 
                 id: profielId, 
                 naam: this.inputNaam,

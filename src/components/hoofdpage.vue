@@ -5,9 +5,6 @@
         <img src="../assets/RealestateText.png" alt="textimg" class="h-[7rem] md:h-[10rem]">
       </div>
   
-      <div class=" flex md:grid justify-center mt-2">
-        <h1 class="md:text-xl text-lg font-serif items-center font-semibold">Ingelogd als <span>[Gebruikersnaam]</span></h1> 
-      </div>
     </div>
   </section>
   
