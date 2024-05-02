@@ -17,7 +17,7 @@
                 <input class="border-2 rounded-xl pl-2" type="text" v-model="email" placeholder="E-mail" autocomplete="username" required >
                 <label class="items-end grid pl-1 font-serif font-semibold">Wachtwoord</label>
                 <input class="border-2 rounded-xl pl-2" type="password" v-model="password" placeholder="Wachtwoord" autocomplete="current-password" required>
-                <button  @click="login()" type="button" class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white">Login</button>
+                <button  @click="login()" type="button" class="border-2 rounded-xl pl-2 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white active:bg-green-300">Login</button>
             </form>
         </div>  
     </section>
@@ -62,8 +62,13 @@ export default {
                     
                 }) 
                 .catch((err) => {
-                    console.log(err.message)
-                    this.error = err.message
+                    console.log(err.code)
+                    if(!err.code === 'auth/too-many-requests'){
+                        this.error = 'Te vaak een poging gedaan, probeer het later nog eens.' ;
+                    } else {
+                        this.error = 'Wachtwoord/Email onjuist.'
+                    }
+                    
                 })
         },
 
