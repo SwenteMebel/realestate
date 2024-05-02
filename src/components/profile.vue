@@ -23,11 +23,10 @@
                             <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-house fa-sm" style="color: #f2f2f2;"></i> Woonplaats:    <span class="text-orange-300">{{ zoekProfiel.woonplaats }}</span></p>
                             <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-location-dot fa-sm" style="color: #fafafa;"></i> Adres:  <span class="text-orange-300">{{ zoekProfiel.adres }}</span></p>
                             <p class="text-white md:text-lg font-serif"> <i class="fa-solid fa-briefcase fa-sm" style="color: #ffffff;"></i> Functie:   <span class="text-orange-300">{{ zoekProfiel.functie }}</span></p>
-                            <button @click="editToggle()" class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime">Edit</button>
+                            <button @click="editToggle()" v-if="user.email === 'admin@admin.com'" class="mt-4 bg-white py-2 px-3 rounded-md active:bg-light-dark active:text-white shadow-md shadow-green-lime">Edit</button>
                         </div>      
                     </div>
                     
-
                 </div>
             </div>
         </div>
@@ -60,6 +59,7 @@ export default{
     
     data(){
         return{
+            user: null,
             edittoggle: false,
             profiel: [],
             inputNaam: '',
@@ -96,6 +96,15 @@ export default{
                 woonplaats: this.inputWoonplaats,
 
             })
+        }, 
+        checkuser(){
+        if(localStorage.getItem('user')){
+            const user = localStorage.getItem('user')
+            this.user = JSON.parse(user)
+            } else {
+                this.user = null
+            console.log('geen user gevonden.')
+            }
         },
     },
 
@@ -103,6 +112,13 @@ export default{
     beforeCreate(){ // functie die aanroept voordat de pagina laad, deze doet een verzoek voor alle profiel leden
         this.$store.dispatch('ProfielAPI/ophalenProfiel')
     },
+
+
+    mounted(){
+        this.checkuser()
+        
+    },
+
 
     computed:{
         selectUserData(){
@@ -129,7 +145,9 @@ export default{
 
         error() { // kijkt of er een error is. 
             return this.$store.state.ProfielAPI.error;
-        }
+        },
+
+      
 
     },
 

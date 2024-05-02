@@ -11,7 +11,7 @@
                         <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Register Login User</h1> 
                     </div>
                 </div>
-                <form v-on:submit.prevent="registerLogin" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
+                <form v-on:submit="registerLogin" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
                     <div v-if="error.length >= 1" class="flex justify-center items-center bg-red-500 rounded-lg p-1">{{ error }}</div>
                     <div v-if="aangemaaktUser != ''" class="flex justify-center items-center bg-green-500 rounded-lg p-1">{{ aangemaaktUser }}</div>
                     <div v-if="errorFirebase.length != ''" class="flex justify-center items-center bg-red-500 rounded-lg p-1">{{ errorFirebase }}</div>
@@ -24,6 +24,7 @@
                     <input type="submit" value="User aanmaken" class="border-2 rounded-xl pl-2 p-1 my-2 mt-[2rem] md:mt-[4rem] font-semibold text-white">
                 </form>
             </div>  
+            
         </section>
 
 
@@ -37,7 +38,7 @@
                         <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Register Profiel</h1> 
                     </div>
                 </div>
-                <form v-on:submit.prevent="registerProfiel" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
+                <form v-on:submit="registerProfiel" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
                     <div v-if="aangemaaktProfiel != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg">{{ aangemaaktProfiel }}</div>
                     <div v-if="ProfielError != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg">{{ ProfielError }}</div>
                     <label class="items-end grid pl-1 font-serif font-semibold">Naam:</label>
@@ -79,6 +80,7 @@ export default {
 
     data(){
         return{
+            user: null,
             error:'',
             aangemaaktUser: '',
             errorFirebase: '',
@@ -88,7 +90,7 @@ export default {
             email: '',
             password: '',
             herpassword: '',
-            user : null,
+            
 
             // voor registreer Profiel user
             naam: '',
@@ -98,61 +100,66 @@ export default {
             adres: '',
             gbdatum: '',
             functie: '',
-            
-
         }
     },  
 
 
-methods: {
-    async registerLogin() {
-        try {
-            if(this.password === this.herpassword){
-                await createUserWithEmailAndPassword(auth, this.email, this.password)
-                const aangemaaktMsg = 'Login user aangemaakt';
-                this.aangemaaktUser = aangemaaktMsg
-           } else {
-                const errormsg = 'Wachtwoord komen niet overeen.';
-                this.error = errormsg;
-            }   
-        } catch (error)  {
-            const firebaseErr = error.message;
-            this.errorFirebase = firebaseErr
-            console.log(error.message)
-        }
+    methods: {
+        async registerLogin() {
+            try {
+                if(this.password === this.herpassword){
+                    await createUserWithEmailAndPassword(auth, this.email, this.password)
+                    const aangemaaktMsg = 'Login user aangemaakt';
+                    this.aangemaaktUser = aangemaaktMsg
+            } else {
+                    const errormsg = 'Wachtwoord komen niet overeen.';
+                    this.error = errormsg;
+                }   
+            } catch (error)  {
+                const firebaseErr = error.message;
+                this.errorFirebase = firebaseErr
+                console.log(error.message)
+            }
+        },
+
+        async registerProfiel(){
+            try {
+                await addDoc(profielUser,{
+                    naam: this.naam,
+                    tussenvoegsel: this.tussenvoegsel,
+                    achternaam: this.achternaam,
+                    gboortedatum: this.gbdatum,
+                    woonplaats: this.woonplaats,
+                    adres: this.adres,
+                    functie: this.functie,
+                })
+                const aangemaakt = 'Profiel is succesvol aangemaakt.'
+                this.aangemaaktProfiel = aangemaakt
+                
+            } catch(error){
+                const errormsg = 'Oeps, er ging iets fout. Probeer het opnieuw'
+                this.ProfielError = errormsg
+                console.log(error)
+            }
+        },
+
+        checkuser(){
+            if(localStorage.getItem('user')){
+                    const user = localStorage.getItem('user')
+                    this.user = JSON.parse(user)
+                } else {
+                    this.user = null
+                    console.log('geen user gevonden.')
+            }
+        } 
     },
 
-    async registerProfiel(){
-        try {
-            await addDoc(profielUser,{
-                naam: this.naam,
-                tussenvoegsel: this.tussenvoegsel,
-                achternaam: this.achternaam,
-                gboortedatum: this.gbdatum,
-                woonplaats: this.woonplaats,
-                adres: this.adres,
-                functie: this.functie,
-            })
-            const aangemaakt = 'Profiel is succesvol aangemaakt.'
-            this.aangemaaktProfiel = aangemaakt
-            
-        } catch(error){
-            const errormsg = 'Oeps, er ging iets fout. Probeer het opnieuw'
-            this.ProfielError = errormsg
-            console.log(error)
-        }
-    },
 
-    checkuser(){
-          if(localStorage.getItem('user')){
-            const user = localStorage.getItem('user')
-            this.user = user
-        } else {
-            this.user = null
-          console.log('geen user gevonden.')
-        }
-      },
-},
+   
+    mounted(){
+        this.checkuser()
+        
+    },
 
 
 }
