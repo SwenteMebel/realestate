@@ -34,7 +34,8 @@
   import AchterOnderhoudVue from './AchterOnderhoud.vue'
   import TechnischeVue from './Technische.vue'
   import ModificatieInventVue from './ModificatieInvent.vue'
-
+  import { checkIfLoggedIn } from '@/mixins/mixins'
+  import router from '@/routing'
 
   export default {
     name: 'hoofdpageVue',
@@ -46,5 +47,13 @@
       ModificatieInventVue,
     },
   
+
+
+    beforeMountmounted(){
+      const user = checkIfLoggedIn()
+      if(user === null){
+        router.push('/login')
+      } 
+    }
   }
   </script>
