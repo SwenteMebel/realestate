@@ -9,7 +9,7 @@
                       </div>
                     </div>
                     <transition name="slide-fade">
-                    <form v-on:submit="addOnderhoud" v-if="toggleonderhoud" >
+                    <form v-on:submit.prevent="addOnderhoud" v-if="toggleonderhoud" >
                         <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
                         <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2">{{ toegevoegd }}</span>
                         <span class="font-semibold">Locatie: </span><input class="rounded-lg border-black border-2 pl-1" type="text" v-model="locatie" placeholder="Locatie" required><br>
@@ -92,7 +92,7 @@ export default {
     },
     
     
-    async addOnderhoud(){ // Voeg schade toe aan de database table SchadeOpnemen.
+    addOnderhoud(){ // Voeg schade toe aan de database table SchadeOpnemen.
         try {
           addDoc(achterstalligOnderhoud, {
             locatie: this.locatie,
@@ -102,9 +102,9 @@ export default {
             Leidingwerk: this.leidingwerk,
             Beglazing: this.beglazing,
             actieVereist: this.actie,
-            Kosten: this.kostenindicatie,
+            Kosten: this.kostenindicatie
             
-          })
+          });
           const toegevoegdMsg = 'Nieuwe Onderhoud is toegevoegd.'
           this.toegevoegd = toegevoegdMsg
         } catch (error){

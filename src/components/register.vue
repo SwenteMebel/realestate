@@ -11,7 +11,7 @@
                         <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Register Login User</h1> 
                     </div>
                 </div>
-                <form v-on:submit="registerLogin" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
+                <form v-on:submit.prevent="registerLogin" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
                     <div v-if="error.length >= 1" class="flex justify-center items-center bg-red-500 rounded-lg p-1">{{ error }}</div>
                     <div v-if="aangemaaktUser != ''" class="flex justify-center items-center bg-green-500 rounded-lg p-1">{{ aangemaaktUser }}</div>
                     <div v-if="errorFirebase.length != ''" class="flex justify-center items-center bg-red-500 rounded-lg p-1">{{ errorFirebase }}</div>
@@ -38,7 +38,7 @@
                         <h1 class="text-xl font-bold font-serif"> <i class="fa-solid fa-right-to-bracket fa-sm"></i> Register Profiel</h1> 
                     </div>
                 </div>
-                <form v-on:submit="registerProfiel" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
+                <form v-on:submit.prevent="registerProfiel" class="p-2 lg:w-[25rem] s:w-[18rem] grid mb-6">
                     <div v-if="aangemaaktProfiel != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg">{{ aangemaaktProfiel }}</div>
                     <div v-if="ProfielError != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg">{{ ProfielError }}</div>
                     <label class="items-end grid pl-1 font-serif font-semibold">Naam:</label>

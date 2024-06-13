@@ -8,12 +8,12 @@
 
    
     <ul class="lg:flex lg:items-center lg:static bg-gradient-to-r from-green-lime via-light-dark to-dark-house text-black md:text-white lg:bg-none absolute lg:w-auto text-semibold w-full h-auto md:top-20 lg:top-20  duration-300 ease-in" :class="[open ? 'left-0' : 'left-[-100%]']">
-      <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/"><i class="fa-solid fa-house fa-sm" style="color: #27ce78;"></i> Home</router-link></li>
+      <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/homepage"><i class="fa-solid fa-house fa-sm" style="color: #27ce78;"></i> Home</router-link></li>
       <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/profile"><i class="fa-solid fa-user fa-sm" style="color: #27ce78;"></i> Profile</router-link></li>
       <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/overzicht"><i class="fa-solid fa-clipboard-list fa-sm" style="color: #27ce78;"></i> Overzicht</router-link></li>
       <li  @click="openMenu()" v-if="user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/register"><i class="fa-regular fa-address-card fa-sm" style="color: #27ce78;"></i> Registeer</router-link></li>
       <button @click="logout"  v-if="user" value="Log out" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-sm" style="color: #27ce78;"></i> Log out </button>
-      <li  @click="openMenu()" v-if="!user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/login"><i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-sm" style="color: #27ce78;"></i> Log in</router-link></li>
+      <li  @click="openMenu()" v-if="!user" class="md:mx-4 md:my-0 p-1 mx-2 text-2xl font-semibold hover:text-orange-400 font-mono ease-linear duration-300"><router-link to="/"><i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-sm" style="color: #27ce78;"></i> Log in</router-link></li>
     </ul>
     
   </div>    
@@ -60,7 +60,7 @@ const auth = getAuth();
         signOut(auth)
         localStorage.removeItem('user')
         this.user = ''
-        router.push('/login')
+        router.push('/')
       },
 
       checkuser(){

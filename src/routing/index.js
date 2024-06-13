@@ -3,11 +3,12 @@ import {  checkIfLoggedIn }   from '../mixins/mixins' // importeerd de functie c
 
 
 import homepage from '@/components/hoofdpage.vue';
+import login from '@/components/login.vue';
 //import overZicht from '@/components/overzicht.vue';
 
 const routes = [
     {
-        path: '/',
+        path: '/homepage',
         name: 'home',
         component: homepage,
         meta: { requiresAuth: true }
@@ -21,10 +22,10 @@ const routes = [
     },
 
     {
-        path: '/login',
+        path: '/',
         name: 'login',
-        component: () => import('@/components/login.vue'), //lazy loading
-        
+        component: login
+      
 
     },
 

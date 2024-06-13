@@ -9,7 +9,7 @@
                 </div>
               </div>
               <transition name="slide-fade">
-                <form v-on:submit="addTechnisch" v-if="toggletechnische" class="">
+                <form v-on:submit.prevent="addTechnisch" v-if="toggletechnische" class="">
                   <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2"> {{ toegevoegd }}</span>
                   <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
                   <span class="font-semibold">Locatie: </span><input class="rounded-lg border-2 border-black pl-2" type="text" v-model="locatie" placeholder="Locatie" required><br>
@@ -85,9 +85,9 @@ export default {
     },
 
 
-    async addTechnisch() { 
+    addTechnisch() { 
       try {
-        await addDoc(technische, {
+        addDoc(technische, {
           locatie: this.locatie,
           koeling: this.koeling,
           verwarming: this.verwarming,

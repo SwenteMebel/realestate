@@ -9,7 +9,7 @@
                       </div>
                     </div>
                     <transition name="slide-fade">
-                    <form v-on:submit="addModificatie" v-if="togglemodificatie" class="">
+                    <form v-on:submit.prevent="addModificatie" v-if="togglemodificatie" class="">
                       <span v-if="toegevoegd != ''" class="flex justify-center items-center bg-green-500 p-1 rounded-lg my-2"> {{ toegevoegd }}</span>
                       <span v-if="error != ''" class="flex justify-center items-center bg-red-500 p-1 rounded-lg my-2">{{ error }}</span>
                       
@@ -88,7 +88,7 @@ methods:{
     
     
 
-    async addModificatie(){ // Voeg schade toe aan de database table SchadeOpnemen.
+    addModificatie(){ // Voeg schade toe aan de database table SchadeOpnemen.
       try {
         addDoc(modificatieInventaris, {
           locatie: this.locatie,

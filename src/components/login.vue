@@ -58,7 +58,7 @@ export default {
                     this.user = auth.currentUser;
                     const user = this.user 
                     localStorage.setItem('user', JSON.stringify(user));
-                    router.push('/')
+                    router.push('/homepage')
                     
                 }) 
                 .catch((err) => {

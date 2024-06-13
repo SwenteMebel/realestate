@@ -52,7 +52,7 @@
     beforeMountmounted(){
       const user = checkIfLoggedIn()
       if(user === null){
-        router.push('/login')
+        router.push('/')
       } 
     }
   }
